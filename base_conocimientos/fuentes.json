@@ -1,0 +1,1496 @@
+{
+  "descripcion": "Fuentes de la base de conocimientos. METODOLÓGICAS [n]: justifican CÓMO razona el sistema (numeración igual a los archivos cita 1 … cita 11; [12] es nueva). TÉCNICAS Tnn: documentación oficial verificada que valida el CONTENIDO de cada caso (síntoma, causa y solución), en reemplazo del experto.",
+  "metodologicas": [
+    {
+      "id": "1",
+      "cita_archivo": "cita 1.pdf",
+      "autores": "R. Mogrovejo Sánchez",
+      "anio": "2017",
+      "ieee": "R. Mogrovejo Sánchez, “Diseño y desarrollo de una plataforma de help desk empleando la metodología de razonamiento basado en casos,” Tesis de pregrado, Esc. Prof. de Ingeniería de Sistemas, Univ. Católica de Santa María, Arequipa, Perú, 2017.",
+      "url": "https://repositorio.ucsm.edu.pe/bitstreams/c4815cf1-f5bd-465b-be10-343e03d75356/download",
+      "idioma": "es",
+      "tipo": "Tesis de pregrado",
+      "justifica": "Revisión humana antes de retener (p. 9), derivar al especialista cuando el sistema no resuelve (p. 60) y la diferencia incidente/problema (p. 224).",
+      "nota_paginas": "Se citan las páginas IMPRESAS. En el visor de PDF: p. 9 → 31, p. 60 → 82, p. 224 → 246."
+    },
+    {
+      "id": "2",
+      "cita_archivo": "cita 2.pdf",
+      "autores": "K. M. Ayasta Arellano, A. Camarena Salaverry y J. De La Flor Tito",
+      "anio": "2022",
+      "ieee": "K. M. Ayasta Arellano, A. Camarena Salaverry y J. De La Flor Tito, “Propuesta de un sistema web de mesa de ayuda para la atención al usuario en el Hospital Nacional Guillermo Almenara Irigoyen 2021,” Tesis de pregrado, Fac. de Ciencias e Ingeniería, Univ. Peruana de Ciencias e Informática, Lima, Perú, 2022.",
+      "url": "https://repositorio.upci.edu.pe/handle/upci/775",
+      "idioma": "es",
+      "tipo": "Tesis de pregrado",
+      "justifica": "Niveles de soporte: “unidades de primer, segundo y tercer nivel de soporte” (p. 41)."
+    },
+    {
+      "id": "3",
+      "cita_archivo": "cita 3.pdf",
+      "autores": "L. S. Benitez Pereira, R. Pizzio y S. Bonho",
+      "anio": "2025",
+      "ieee": "L. S. Benitez Pereira, R. Pizzio y S. Bonho, “Comparison of information retrieval techniques applied to IT support tickets,” arXiv:2508.05654, jul. 2025.",
+      "url": "https://arxiv.org/abs/2508.05654",
+      "idioma": "en",
+      "tipo": "Artículo académico (preprint)",
+      "justifica": "Similitud de Jaccard entre conjuntos de etiquetas de tickets (Ec. 2) y la métrica de acierto en los primeros resultados."
+    },
+    {
+      "id": "4",
+      "cita_archivo": "cita 4.pdf",
+      "autores": "E. E. Masquez Cubas",
+      "anio": "2023",
+      "ieee": "E. E. Masquez Cubas, “Modelo de gestión de incidencias basado en marcos de trabajo y estándares para mejorar el servicio de TI en el sector salud de la región Lambayeque,” Tesis de maestría, Esc. de Posgrado, Univ. Católica Santo Toribio de Mogrovejo, Chiclayo, Perú, 2023.",
+      "url": "",
+      "idioma": "es",
+      "tipo": "Tesis de maestría",
+      "justifica": "Registro de síntomas en el ticket (p. 37), escalado funcional (p. 38), cierre con conformidad (p. 49), tabla de categorías con código (p. 86), prioridad (p. 87), ficha del incidente (p. 96), tiempo de resolución como métrica (p. 98) y recurrencia → problema (p. 184)."
+    },
+    {
+      "id": "5",
+      "cita_archivo": "cita 5.pdf",
+      "autores": "B. Betru y F. Getahun",
+      "anio": "2023",
+      "ieee": "B. Betru y F. Getahun, “Ontology-driven intelligent IT incident management model,” Int. J. Inf. Technol. Comput. Sci., vol. 15, no. 1, pp. 30–41, feb. 2023, doi: 10.5815/ijitcs.2023.01.04.",
+      "url": "https://doi.org/10.5815/ijitcs.2023.01.04",
+      "idioma": "en",
+      "tipo": "Artículo académico",
+      "justifica": "Vocabulario controlado del dominio de incidentes de TI (catálogo cerrado de síntomas), p. 31."
+    },
+    {
+      "id": "6",
+      "cita_archivo": "cita 6.pdf",
+      "autores": "M. Chen, R. Qu y W. Fang",
+      "anio": "2022",
+      "ieee": "M. Chen, R. Qu y W. Fang, “Case-based reasoning system for fault diagnosis of aero-engines,” Expert Syst. Appl., vol. 202, art. 117350, 2022, doi: 10.1016/j.eswa.2022.117350.",
+      "url": "https://doi.org/10.1016/j.eswa.2022.117350",
+      "idioma": "en",
+      "tipo": "Artículo académico",
+      "justifica": "Similitud local por tipo de atributo (Ec. 1 y Ec. 4, similitud por árbol), similitud global como suma ponderada (Ec. 5), k vecinos y exactitud (Tabla 5)."
+    },
+    {
+      "id": "7",
+      "cita_archivo": "cita 7.pdf",
+      "autores": "S. Heras et al.",
+      "anio": "2006",
+      "ieee": "S. Heras et al., “CBR model for the intelligent management of customer support centers,” en Intelligent Data Engineering and Automated Learning – IDEAL 2006, LNCS, vol. 4224, Berlín, Alemania: Springer, 2006, pp. 663–670, doi: 10.1007/11875581_80.",
+      "url": "http://hdl.handle.net/10251/78887",
+      "idioma": "en",
+      "tipo": "Artículo académico (congreso)",
+      "justifica": "Árbol de tipificación (Sec. 3.1–3.2), grado de idoneidad de la solución (Sec. 3.3) y retención con umbral de similitud hallado experimentalmente (Sec. 3.4–3.5)."
+    },
+    {
+      "id": "8",
+      "cita_archivo": "cita 8.pdf",
+      "autores": "A. Aamodt y E. Plaza",
+      "anio": "1994",
+      "ieee": "A. Aamodt y E. Plaza, “Case-based reasoning: Foundational issues, methodological variations, and system approaches,” AI Commun., vol. 7, no. 1, pp. 39–59, 1994.",
+      "url": "https://doi.org/10.3233/AIC-1994-7104",
+      "idioma": "en",
+      "tipo": "Artículo académico",
+      "justifica": "Ciclo recuperar–reutilizar–revisar–retener; casos “suficientemente similares… dado un umbral de similitud” (Sec. 5); copiar o adaptar la solución (Sec. 6); revisión en el entorno real (Sec. 7)."
+    },
+    {
+      "id": "9",
+      "cita_archivo": "cita 9.pdf",
+      "autores": "R. López de Mántaras et al.",
+      "anio": "2005",
+      "ieee": "R. López de Mántaras et al., “Retrieval, reuse, revision and retention in case-based reasoning,” Knowl. Eng. Rev., vol. 20, no. 3, pp. 215–240, 2005, doi: 10.1017/S0269888906000646.",
+      "url": "https://doi.org/10.1017/S0269888906000646",
+      "idioma": "en",
+      "tipo": "Artículo académico",
+      "justifica": "Recuperación k-NN (Sec. 3.1.1), recuperación orientada a la explicación (Sec. 3.3.5), adaptación por sustitución (Sec. 4) y mantenimiento de la base (Sec. 5)."
+    },
+    {
+      "id": "10",
+      "cita_archivo": "cita 10.pdf",
+      "autores": "D. Wettschereck, D. W. Aha y T. Mohri",
+      "anio": "1997",
+      "ieee": "D. Wettschereck, D. W. Aha y T. Mohri, “A review and empirical evaluation of feature weighting methods for a class of lazy learning algorithms,” Artif. Intell. Rev., vol. 11, pp. 273–314, 1997, doi: 10.1023/A:1006593614256.",
+      "url": "https://doi.org/10.1023/A:1006593614256",
+      "idioma": "en",
+      "tipo": "Artículo académico",
+      "justifica": "Los pesos de los atributos pueden asignarse con conocimiento del dominio: “using knowledge to assign feature weights” (Sec. 3.5)."
+    },
+    {
+      "id": "11",
+      "cita_archivo": "cita 11.pdf",
+      "autores": "B. Smyth y M. T. Keane",
+      "anio": "1995",
+      "ieee": "B. Smyth y M. T. Keane, “Remembering to forget: A competence-preserving case deletion policy for case-based reasoning systems,” en Proc. 14th Int. Joint Conf. Artif. Intell. (IJCAI-95), Montreal, Canadá, 1995, pp. 377–383.",
+      "url": "https://www.ijcai.org/Proceedings/95-1/Papers/050.pdf",
+      "idioma": "en",
+      "tipo": "Artículo académico (congreso)",
+      "justifica": "Mantenimiento de la base: evitar casos redundantes y conservar los que dan cobertura (competencia)."
+    },
+    {
+      "id": "12",
+      "cita_archivo": "",
+      "autores": "NIST",
+      "anio": "2012",
+      "ieee": "P. Cichonski, T. Millar, T. Grance y K. Scarfone, “Computer security incident handling guide,” NIST, Gaithersburg, MD, EE. UU., SP 800-61 Rev. 2, 2012, doi: 10.6028/NIST.SP.800-61r2.",
+      "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf",
+      "idioma": "en",
+      "tipo": "publicación de organismo de normalización",
+      "justifica": "Priorización según impacto y puntos de escalamiento en la gestión de incidentes (Sec. 2.3.1 y 3.2). Documento reemplazado por la Rev. 3 en 2025, pero consultable."
+    }
+  ],
+  "tecnicas": [
+    {
+      "id": "T01",
+      "clave": "BROTHER-CALIDAD",
+      "titulo": "Improve the Print Quality (HL-L2460DW Online User's Guide)",
+      "organizacion": "Brother",
+      "anio": "s. f.",
+      "url": "https://support.brother.com/g/s/id/htmldoc/printer/cv_hll2460dw/use/html/GUID-EEC1EE16-C8ED-4BC3-B3C4-27B0AACF0D44_1.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-043"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T02",
+      "clave": "BROTHER-ATASCO",
+      "titulo": "Paper is Jammed in the Back of the Machine (HL-L6415DW Online User's Guide)",
+      "organizacion": "Brother",
+      "anio": "s. f.",
+      "url": "https://support.brother.com/g/s/id/htmldoc/printer/cv_hll6415dw/use/html/GUID-BA6FFC51-E9EA-4EFF-B9FA-7A438F9795A3_1.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-041"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T03",
+      "clave": "CISA-STOPRANSOMWARE",
+      "titulo": "#StopRansomware Guide",
+      "organizacion": "CISA",
+      "anio": "2023",
+      "url": "https://www.cisa.gov/stopransomware/ransomware-guide",
+      "idioma": "en",
+      "tipo": "Guía gubernamental",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-056"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T05",
+      "clave": "UBUNTU-NMCLI",
+      "titulo": "nmcli(1) — Ubuntu jammy (network-manager 1.36.6-0ubuntu2)",
+      "organizacion": "Canonical (Ubuntu)",
+      "anio": "2022",
+      "url": "https://manpages.ubuntu.com/manpages/jammy/man1/nmcli.1.html",
+      "idioma": "en",
+      "tipo": "manpage oficial de distribución",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T06",
+      "clave": "UBUNTU-NM-SETTINGS",
+      "titulo": "Ubuntu Manpage: nm-settings-nmcli (Ubuntu 22.04 jammy)",
+      "organizacion": "Canonical (Ubuntu)",
+      "anio": "s. f.",
+      "url": "https://manpages.ubuntu.com/manpages/jammy/man5/nm-settings-nmcli.5.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-012"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T07",
+      "clave": "CISCO-SWITCH-PORT",
+      "titulo": "Troubleshoot Switch Port and Interface Problems",
+      "organizacion": "Cisco",
+      "anio": "s. f.",
+      "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-switches/12027-53.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-003",
+        "TK-004",
+        "TK-005"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T08",
+      "clave": "CISCO-WIFI-THROUGHPUT",
+      "titulo": "Validate Wi-Fi Throughput Testing and Monitoring Guide",
+      "organizacion": "Cisco",
+      "anio": "s. f.",
+      "url": "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/221766-validate-wi-fi-throughput-testing-and.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-013"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T09",
+      "clave": "DEBIAN-APT-GET-MAN",
+      "titulo": "apt-get(8) — APT package handling utility (página de manual)",
+      "organizacion": "Debian",
+      "anio": "s. f.",
+      "url": "https://manpages.debian.org/bookworm/apt/apt-get.8.en.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-054"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T10",
+      "clave": "DEBIAN-DHCLIENT",
+      "titulo": "dhclient(8) — isc-dhcp-client (Debian bookworm)",
+      "organizacion": "Debian",
+      "anio": "s.f.",
+      "url": "https://manpages.debian.org/bookworm/isc-dhcp-client/dhclient.8.en.html",
+      "idioma": "en",
+      "tipo": "manpage oficial de distribución",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T11",
+      "clave": "DELL-RUIDOS",
+      "titulo": "Computer Making Noises? Troubleshoot Loud Fans, Hard Drive & More",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/contents/en-us/article/product-support/self-support-knowledgebase/fix-common-issues/common-noises-from-computer",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-029",
+        "TK-030",
+        "TK-031"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T12",
+      "clave": "DELL-NO-ENCIENDE",
+      "titulo": "Computer Won't Turn On: Troubleshoot Power Issues",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/contents/article/product-support/self-support-knowledgebase/fix-common-issues/no-power",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-020",
+        "TK-021"
+      ],
+      "reglas": [
+        "R3"
+      ]
+    },
+    {
+      "id": "T13",
+      "clave": "DELL-CMOS",
+      "titulo": "Cómo reemplazar o cambiar una batería CMOS en su computadora de escritorio Dell",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/es-es/000135183",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-017"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T14",
+      "clave": "DELL-PANTALLA-LAPTOP",
+      "titulo": "How to Fix a Black Screen or Display Issues on a Dell Laptop",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000134946",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-026",
+        "TK-028"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T15",
+      "clave": "DELL-SOBRECALENTAMIENTO",
+      "titulo": "How to Stop Computer and Laptop Overheating and Shut Down Issues",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000130867",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-029",
+        "TK-030"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T16",
+      "clave": "DELL-PRUEBA-LCD",
+      "titulo": "How to Test Your Dell Laptop Screen",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000134936",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-026"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T17",
+      "clave": "DELL-ADAPTADOR-CA",
+      "titulo": "How to Troubleshoot AC Adapter Issues on a Dell Laptop",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000125125/how-to-troubleshoot-ac-adapter-issues",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-037"
+      ],
+      "reglas": [
+        "R3"
+      ]
+    },
+    {
+      "id": "T18",
+      "clave": "DELL-BATERIA",
+      "titulo": "How to Troubleshoot Dell Laptop Battery Issues",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/000123069",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-038"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T19",
+      "clave": "DELL-DESKTOP-POWER",
+      "titulo": "How to Troubleshoot Power Issues on a Dell Desktop or All in One (KB 000125186)",
+      "organizacion": "Dell",
+      "anio": "s.f.",
+      "url": "https://www.dell.com/support/kbdoc/000125186",
+      "idioma": "en",
+      "tipo": "soporte oficial del fabricante",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R3"
+      ]
+    },
+    {
+      "id": "T20",
+      "clave": "DELL-NO-VIDEO",
+      "titulo": "Resolve No Power, No POST, No Boot or No Video Issues",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/ar-qa/000125609/resolve-no-power-no-post-no-boot-or-no-video-issues-with-your-dell-computer",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-022",
+        "TK-023"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T21",
+      "clave": "DELL-TARJETA-VIDEO",
+      "titulo": "Troubleshooting Video Issues With a Graphics Card Fitted in a Dell Desktop",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000175323",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-023"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T22",
+      "clave": "DELL-PITIDOS",
+      "titulo": "Understanding Beep Codes on a Dell Desktops",
+      "organizacion": "Dell",
+      "anio": "s. f.",
+      "url": "https://www.dell.com/support/kbdoc/en-us/000124349/",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-022"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T23",
+      "clave": "EPSON-SIN-SENAL",
+      "titulo": "I see the message No Signal. What should I do? (Epson LS500)",
+      "organizacion": "Epson",
+      "anio": "s. f.",
+      "url": "https://epson.com/faq/SPT_V11H956620~faq-00003f7-ls500w_ls500b",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-024",
+        "TK-025"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T24",
+      "clave": "EPSON-ASIGNACION-IP",
+      "titulo": "IP Address Assignment (User's Guide AM-C10000 Series)",
+      "organizacion": "Epson",
+      "anio": "s. f.",
+      "url": "https://download4.epson.biz/sec_pubs/am-c10000_series/useg/en/GUID-2C32CD08-3567-4C82-A683-B4BB1141BE8F.htm",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-040"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T25",
+      "clave": "EPSON-PUERTO-TCPIP",
+      "titulo": "Setting Up Standard TCP/IP Ports - Windows",
+      "organizacion": "Epson",
+      "anio": "s. f.",
+      "url": "https://download4.epson.biz/sec_pubs/tips/Tips_Printer_1/en/GUID-EAF6D5BF-17DD-4CA7-A0AA-E9B9DD086AB3.htm",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-040",
+        "TK-042"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T26",
+      "clave": "GNOME-WIFI-CONNECT",
+      "titulo": "Connect to a wireless network (GNOME Help, escritorio usado por Ubuntu)",
+      "organizacion": "GNOME",
+      "anio": "s. f.",
+      "url": "https://help.gnome.org/gnome-help/net-wireless-connect.html",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-011",
+        "TK-012"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T27",
+      "clave": "GOOGLE-CHROME-MALWARE",
+      "titulo": "Eliminar anuncios no deseados, ventanas emergentes y malware (Ayuda de Google Chrome)",
+      "organizacion": "Google",
+      "anio": "s. f.",
+      "url": "https://support.google.com/chrome/answer/2765944?hl=es",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-045"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T28",
+      "clave": "GOOGLE-CHROME-ERRORES",
+      "titulo": "Solucionar errores de conexión y de carga en Chrome",
+      "organizacion": "Google",
+      "anio": "s. f.",
+      "url": "https://support.google.com/chrome/answer/6098869?hl=es",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-014",
+        "TK-016"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T29",
+      "clave": "INCIBE-RANSOMWARE",
+      "titulo": "Ayuda ransomware (Servicio antiransomware)",
+      "organizacion": "INCIBE",
+      "anio": "s. f.",
+      "url": "https://www.incibe.es/empresas/te-ayudamos/servicio-antiransomware",
+      "idioma": "es",
+      "tipo": "Guía gubernamental",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-056"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T30",
+      "clave": "LENOVO-HOTKEYS",
+      "titulo": "Interactuar con el equipo (Guía del usuario Yoga Slim 7 Pro 14\")",
+      "organizacion": "Lenovo",
+      "anio": "s. f.",
+      "url": "https://download.lenovo.com/pccbbs/pubs/yoga_slim7_14/html/html_es/moreinfo_interact.html",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-009"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T31",
+      "clave": "MS-BLOQUEO-CUENTA",
+      "titulo": "Account lockout threshold - Windows 10",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/account-lockout-threshold",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-057"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T32",
+      "clave": "MS-ENTRA-MFA-METODOS",
+      "titulo": "Administración de los métodos de autenticación para la autenticación multifactor de Microsoft Entra",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/entra/identity/authentication/howto-mfa-userdevicesettings",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-060"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T33",
+      "clave": "MS-CRED-MANAGER",
+      "titulo": "Administrador de credenciales en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/security/credential-manager-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-019"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T34",
+      "clave": "MS-CAMARA-PRIVACIDAD",
+      "titulo": "Administrar permisos de aplicación para una cámara en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/privacy/manage-app-permissions-for-a-camera-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-036"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T35",
+      "clave": "MS-AGREGAR-IMPRESORA",
+      "titulo": "Agregar o instalar una impresora en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/add-or-install-a-printer-in-windows-cc0724cf-793e-3542-d1ff-727e4978638b",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-042"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T36",
+      "clave": "MS-ENTRA-SSPR",
+      "titulo": "Análisis detallado del autoservicio de restablecimiento de contraseña - Microsoft Entra ID",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/entra/identity/authentication/concept-sspr-howitworks",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-057",
+        "TK-058"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T37",
+      "clave": "MS-DEFENDER-PUA",
+      "titulo": "Bloquear aplicaciones potencialmente no deseadas con Antivirus de Microsoft Defender",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/defender-endpoint/detect-block-potentially-unwanted-apps-microsoft-defender-antivirus",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-045"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T38",
+      "clave": "MS-TEAMS-AUDIO",
+      "titulo": "Cambiar a configuración de audio (Microsoft Teams)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/office/change-audio-settings-7a35433c-02df-4809-8f98-9a4da8a63c82",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-052"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T39",
+      "clave": "MS-TCPIP-CONFIG",
+      "titulo": "Cambiar la configuración de TCP/IP",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/cambiar-la-configuraci%C3%B3n-de-tcp-ip-bd0a07af-15f5-cd6a-363f-ca2b6f391ace",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-001",
+        "TK-006"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T40",
+      "clave": "MS-CAMBIAR-CONTRASENA",
+      "titulo": "Cambiar la contraseña de la cuenta profesional o educativa",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-ES/accounts-billing/work-school/change-your-work-or-school-account-password",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-059"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T41",
+      "clave": "MS-APPS-INICIO",
+      "titulo": "Configurar las aplicaciones de inicio en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/experience/startup-boot/configure-startup-applications-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-044"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T42",
+      "clave": "MS-COLA-IMPRESION",
+      "titulo": "Corregir errores del servicio de cola de impresión que no se ejecuta en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/fix-printer-spooler-errors-in-windows-bb0de80a-8c4a-4938-a36a-f89a859113f0",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-039"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T43",
+      "clave": "MS-OUTLOOK-REPARAR-PERFIL",
+      "titulo": "Corregir la conexión de correo electrónico de Outlook mediante la reparación del perfil",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/outlook/fix-your-outlook-email-connection-by-repairing-your-profile",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-051"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T44",
+      "clave": "MS-DEFENDER-FALSOS-POSITIVOS",
+      "titulo": "Corregir los falsos positivos y negativos en Microsoft Defender para punto de conexión",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/defender-endpoint/defender-endpoint-false-positives-negatives",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-055"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T45",
+      "clave": "MS-PROYECTAR",
+      "titulo": "Creación de reflejo de pantalla y proyección en su PC o inalámbrica",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/help/27911",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-024"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T46",
+      "clave": "MS-DESINSTALAR-ACTUALIZACION",
+      "titulo": "Cómo desinstalar una actualización de Windows Update",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/how-to-uninstall-a-windows-update-c77b8f9b-e4dc-4e9f-a803-fdec12e59fb0",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-047"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T47",
+      "clave": "MS-UAC",
+      "titulo": "Cómo funciona el Control de cuentas de usuario",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/windows/security/application-security/application-control/user-account-control/how-it-works",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-053"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T48",
+      "clave": "MS-DHCP-LEASE-DURATION",
+      "titulo": "Determining Lease Duration (DHCP, Windows Server 2003)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc783573(v=ws.10)",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-008"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T49",
+      "clave": "MS-DHCP-TS-GUIDANCE",
+      "titulo": "DHCP troubleshooting guidance",
+      "organizacion": "Microsoft",
+      "anio": "2026",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-dhcp-guidance",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-003",
+        "TK-006",
+        "TK-007",
+        "TK-008"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T50",
+      "clave": "MS-OUTLOOK-0X8004010F",
+      "titulo": "Error 0x8004010F when sending or receiving email - Outlook",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-US/outlook/troubleshoot/synchronization/error-0x8004010f-when-sending-or-receiving-emails",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-051"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T51",
+      "clave": "MS-OFFICE-SIN-LICENCIA",
+      "titulo": "Errores de activación y de producto sin licencia en Office",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-ES/Microsoft-365-Activation-Licensing/office-install/unlicensed-product-and-activation-errors-in-office",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-049"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T52",
+      "clave": "MS-TIME-DATE",
+      "titulo": "Establecer la configuración de hora, fecha y zona horaria en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/experience/personalization/set-time-date-and-time-zone-settings-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-017",
+        "TK-018"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T53",
+      "clave": "MS-EVENT-4199",
+      "titulo": "Event ID 4199 — TCP/IP Network Interface Configuration",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd379922(v=ws.10)",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-006"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T54",
+      "clave": "MS-ETHERNET",
+      "titulo": "Fix Ethernet connection problems in Windows",
+      "organizacion": "Microsoft",
+      "anio": "s.f.",
+      "url": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows",
+      "idioma": "en",
+      "tipo": "soporte oficial del fabricante",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R2"
+      ]
+    },
+    {
+      "id": "T55",
+      "clave": "MS-PROXY-RESET",
+      "titulo": "How to reset your Internet Explorer proxy settings",
+      "organizacion": "Microsoft",
+      "anio": "2020",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/troubleshoot/browsers/connectivity-navigation/how-to-reset-proxy-settings",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-015"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T56",
+      "clave": "MS-APIPA",
+      "titulo": "How to use automatic TCP/IP addressing without a DHCP server",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/windows-server/troubleshoot/how-to-use-automatic-tcpip-addressing-without-a-dh",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-007"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T57",
+      "clave": "MS-IPCONFIG",
+      "titulo": "ipconfig (Comandos de Windows)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/ipconfig",
+      "url_alterna_en": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-001",
+        "TK-002"
+      ],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T58",
+      "clave": "MS-LIBERAR-ESPACIO",
+      "titulo": "Liberar espacio en unidades de disco en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/free-up-drive-space-in-windows-85529ccb-c365-490d-b548-831022bc9b32",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-032"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T59",
+      "clave": "MS-EDAD-MAX-CONTRASENA",
+      "titulo": "Maximum password age - Windows 10",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-password-age",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-059"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T60",
+      "clave": "MS-PERFIL-TEMPORAL",
+      "titulo": "Mensaje de error \"No podemos iniciar sesión en su cuenta\"",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/security/identity-signin/we-can-t-sign-in-to-your-account-error-message",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-048"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T61",
+      "clave": "MS-NET-USE",
+      "titulo": "Net use (Windows Server 2012 R2 y 2012)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/gg651155(v=ws.11)",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-019"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T62",
+      "clave": "MS-POWERCFG",
+      "titulo": "Opciones de la línea de comandos de Powercfg",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-038"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T63",
+      "clave": "MS-MOUSE-TECLADO",
+      "titulo": "Problemas con el mouse y el teclado en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/help/17417",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-033",
+        "TK-034",
+        "TK-061",
+        "TK-062",
+        "TK-064"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T64",
+      "clave": "MS-SEGURIDAD-WINDOWS",
+      "titulo": "Protección contra amenazas y virus en la aplicación Seguridad de Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/security/threat-malware-protection/virus-and-threat-protection-in-the-windows-security-app",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-045",
+        "TK-055"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T65",
+      "clave": "MS-SSPR-REGISTRAR",
+      "titulo": "Registrar el método de verificación de restablecimiento de contraseña para una cuenta profesional o educativa",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-ES/accounts-billing/work-school/register-the-password-reset-verification-method-for-a-work-or-school-account",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-058"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T66",
+      "clave": "MS-EXCEL-REPARAR",
+      "titulo": "Reparar un libro dañado",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/excel/repair-a-corrupted-workbook",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-050"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T67",
+      "clave": "MS-PERFIL-DANADO",
+      "titulo": "Reparar un perfil de usuario dañado",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/security/identity-signin/fix-a-corrupted-user-profile",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-048"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T68",
+      "clave": "MS-BSOD-AVANZADO",
+      "titulo": "Resolución avanzada de problemas para errores de código de parada",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/troubleshoot/windows-client/performance/stop-error-or-blue-screen-error-troubleshooting",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-027",
+        "TK-028"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T69",
+      "clave": "MS-MEMDIAG",
+      "titulo": "Run Diagnostics to Check Your System for Memory Problems (TechNet Magazine)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/technet-magazine/ff700221(v=msdn.10)",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-027"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T70",
+      "clave": "MS-SERVICIOS-WS2016",
+      "titulo": "Security guidelines for system services in Windows Server 2016",
+      "organizacion": "Microsoft",
+      "anio": "s.f.",
+      "url": "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server",
+      "idioma": "en",
+      "tipo": "documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T71",
+      "clave": "MS-SET-DHCPSCOPE",
+      "titulo": "Set-DhcpServerv4Scope (DhcpServer)",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/dhcpserver/set-dhcpserverv4scope",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-008"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T72",
+      "clave": "MS-WIFI-WINDOWS",
+      "titulo": "Solucionar problemas de conexión Wi-Fi en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/solucionar-problemas-de-conexi%C3%B3n-wi-fi-en-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c",
+      "url_alterna_en": "https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-wi-fi-connection-issues-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-007",
+        "TK-009",
+        "TK-010",
+        "TK-011",
+        "TK-013"
+      ],
+      "reglas": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "id": "T73",
+      "clave": "MS-SONIDO",
+      "titulo": "Solucionar problemas de sonido o audio en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/help/4026994",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-035",
+        "TK-064"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T74",
+      "clave": "MS-MICROFONO",
+      "titulo": "Solucionar problemas del micrófono",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-ES/Windows/Hardware/Drivers/fix-microphone-problems",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-052"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T75",
+      "clave": "MS-DNS-CLIENT-TS",
+      "titulo": "Solución de problemas de clientes DNS",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://learn.microsoft.com/es-es/windows-server/networking/dns/troubleshoot/troubleshoot-dns-client",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-001",
+        "TK-002"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T76",
+      "clave": "MS-RENDIMIENTO-PC",
+      "titulo": "Tips to improve PC performance in Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/en-us/windows/tips-to-improve-pc-performance-in-windows-b3b3ef5b-5953-fb6a-2528-4bbed82fba96",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-044",
+        "TK-046"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T77",
+      "clave": "MS-PROXY",
+      "titulo": "Usar un servidor proxy en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/usar-un-servidor-proxy-en-windows-03096c53-0554-4ffe-b6ab-8b1deee8dae1",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-015"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T78",
+      "clave": "MOZILLA-TIME-ERRORS",
+      "titulo": "Cómo solucionar problemas de error de fecha y hora en páginas seguras",
+      "organizacion": "Mozilla",
+      "anio": "s. f.",
+      "url": "https://support.mozilla.org/es/kb/como-solucionar-problemas-de-error-de-fecha-y-hora-paginas-seguras",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-017",
+        "TK-018"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T79",
+      "clave": "MAN7-RESOLVECTL",
+      "titulo": "resolvectl(1) — Linux manual page (systemd)",
+      "organizacion": "Proyecto systemd",
+      "anio": "2026",
+      "url": "https://man7.org/linux/man-pages/man1/resolvectl.1.html",
+      "idioma": "en",
+      "tipo": "manpage oficial (upstream systemd)",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T80",
+      "clave": "MAN7-SYSTEMD-RESOLVED",
+      "titulo": "systemd-resolved.service(8) — Linux manual page",
+      "organizacion": "Proyecto systemd",
+      "anio": "2026",
+      "url": "https://man7.org/linux/man-pages/man8/systemd-resolved.service.8.html",
+      "idioma": "en",
+      "tipo": "manpage oficial (upstream systemd)",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [],
+      "reglas": [
+        "R1"
+      ]
+    },
+    {
+      "id": "T81",
+      "clave": "REDHAT-WIFI-8021X",
+      "titulo": "Chapter 9. Managing wifi connections (Configuring and managing networking, RHEL 10)",
+      "organizacion": "Red Hat",
+      "anio": "s. f.",
+      "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_networking/managing-wifi-connections",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-012"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T82",
+      "clave": "MS-BLUETOOTH-DESCONECTA",
+      "titulo": "Bluetooth se sigue desconectando en Windows",
+      "organizacion": "Microsoft",
+      "anio": "s. f.",
+      "url": "https://support.microsoft.com/es-es/windows/hardware/bluetooth/bluetooth-keeps-disconnecting-in-windows",
+      "idioma": "es",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-063"
+      ],
+      "reglas": []
+    },
+    {
+      "id": "T83",
+      "clave": "LOGITECH-DEJA-RESPONDER",
+      "titulo": "Logitech device stops responding in Windows",
+      "organizacion": "Logitech",
+      "anio": "s. f.",
+      "url": "https://support.logi.com/hc/en-ca/articles/360023347833",
+      "idioma": "en",
+      "tipo": "Documentación oficial",
+      "verificada": true,
+      "fecha_consulta": "2026-10-14",
+      "casos": [
+        "TK-061"
+      ],
+      "reglas": []
+    }
+  ]
+}

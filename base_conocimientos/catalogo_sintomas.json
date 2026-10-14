@@ -1,0 +1,1069 @@
+{
+  "descripcion": "Vocabulario cerrado de síntomas: el usuario elige de esta lista; no se interpreta texto libre. tipo «falla» = describe la falla; tipo «contexto» = dato adicional que afina la búsqueda. «excluyentes» = síntomas que no pueden darse a la vez: un caso que tiene uno no se recupera para un ticket que marcó otro del mismo grupo.",
+  "fuente": "[5] p. 31 (vocabulario controlado); [9] Sec. 3.1; [4] p. 37 (registro de síntomas)",
+  "sintomas": [
+    {
+      "codigo": "S001",
+      "nombre": "Sin acceso a internet",
+      "grupo": "Red",
+      "pregunta": "¿Sin acceso a internet?",
+      "tipo": "falla",
+      "implica": [
+        "S011"
+      ]
+    },
+    {
+      "codigo": "S002",
+      "nombre": "Luz de enlace encendida",
+      "grupo": "Red",
+      "pregunta": "¿Luz de enlace encendida?",
+      "tipo": "contexto",
+      "requiere": {
+        "conexion": "Cableada"
+      }
+    },
+    {
+      "codigo": "S003",
+      "nombre": "Páginas no cargan por nombre",
+      "grupo": "Red",
+      "pregunta": "¿Páginas no cargan por nombre?",
+      "tipo": "falla",
+      "implica": [
+        "S011"
+      ]
+    },
+    {
+      "codigo": "S004",
+      "nombre": "Luz de enlace apagada",
+      "grupo": "Red",
+      "pregunta": "¿Luz de enlace apagada?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Cableada"
+      },
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S005",
+      "nombre": "Ícono de red con X",
+      "grupo": "Red",
+      "pregunta": "¿Ícono de red con X?",
+      "tipo": "falla",
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S006",
+      "nombre": "Otro equipo tampoco conecta en ese punto",
+      "grupo": "Red",
+      "pregunta": "¿Otro equipo tampoco conecta en ese punto?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Cableada"
+      },
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S007",
+      "nombre": "Mensaje de conflicto de IP",
+      "grupo": "Red",
+      "pregunta": "¿Mensaje de conflicto de IP?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S008",
+      "nombre": "Conexión intermitente",
+      "grupo": "Red",
+      "pregunta": "¿Conexión intermitente?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S009",
+      "nombre": "Conectado sin internet",
+      "grupo": "Red",
+      "pregunta": "¿Conectado sin internet?",
+      "tipo": "falla",
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S010",
+      "nombre": "IP 169.254.x.x",
+      "grupo": "Red",
+      "pregunta": "¿IP 169.254.x.x?",
+      "tipo": "falla",
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S011",
+      "nombre": "Páginas no cargan",
+      "grupo": "Red",
+      "pregunta": "¿Páginas no cargan?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S012",
+      "nombre": "Varios usuarios con el mismo fallo",
+      "grupo": "Red",
+      "pregunta": "¿Varios usuarios con el mismo fallo?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S013",
+      "nombre": "No aparecen redes Wi-Fi",
+      "grupo": "Red",
+      "pregunta": "¿No aparecen redes Wi-Fi?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      },
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S014",
+      "nombre": "Ícono de avión activo",
+      "grupo": "Red",
+      "pregunta": "¿Ícono de avión activo?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      },
+      "implica": [
+        "S013"
+      ]
+    },
+    {
+      "codigo": "S015",
+      "nombre": "Adaptador no figura en administrador de dispositivos",
+      "grupo": "Red",
+      "pregunta": "¿Adaptador no figura en administrador de dispositivos?",
+      "tipo": "falla",
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S016",
+      "nombre": "Error de autenticación Wi-Fi",
+      "grupo": "Red",
+      "pregunta": "¿Error de autenticación Wi-Fi?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      },
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S017",
+      "nombre": "Pide contraseña repetidamente",
+      "grupo": "Red",
+      "pregunta": "¿Pide contraseña repetidamente?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      },
+      "implica": [
+        "S001"
+      ]
+    },
+    {
+      "codigo": "S018",
+      "nombre": "Conexión lenta",
+      "grupo": "Red",
+      "pregunta": "¿Conexión lenta?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S019",
+      "nombre": "Señal Wi-Fi débil",
+      "grupo": "Red",
+      "pregunta": "¿Señal Wi-Fi débil?",
+      "tipo": "falla",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      }
+    },
+    {
+      "codigo": "S020",
+      "nombre": "Error de proxy en el navegador",
+      "grupo": "Red",
+      "pregunta": "¿Error de proxy en el navegador?",
+      "tipo": "falla",
+      "implica": [
+        "S011"
+      ]
+    },
+    {
+      "codigo": "S021",
+      "nombre": "Otros programas sí tienen internet",
+      "grupo": "Red",
+      "pregunta": "¿Otros programas sí tienen internet?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S022",
+      "nombre": "Plataforma virtual no carga",
+      "grupo": "Red",
+      "pregunta": "¿Plataforma virtual no carga?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S023",
+      "nombre": "Otras páginas sí cargan",
+      "grupo": "Red",
+      "pregunta": "¿Otras páginas sí cargan?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S024",
+      "nombre": "Bucle al iniciar sesión",
+      "grupo": "Red",
+      "pregunta": "¿Bucle al iniciar sesión?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S025",
+      "nombre": "Error de certificado de seguridad",
+      "grupo": "Red",
+      "pregunta": "¿Error de certificado de seguridad?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S026",
+      "nombre": "Fecha y hora incorrectas",
+      "grupo": "Red",
+      "pregunta": "¿Fecha y hora incorrectas?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S027",
+      "nombre": "Páginas seguras no cargan",
+      "grupo": "Red",
+      "pregunta": "¿Páginas seguras no cargan?",
+      "tipo": "falla",
+      "implica": [
+        "S011"
+      ]
+    },
+    {
+      "codigo": "S028",
+      "nombre": "No accede a carpeta compartida",
+      "grupo": "Red",
+      "pregunta": "¿No accede a carpeta compartida?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S029",
+      "nombre": "Pide credenciales o acceso denegado al abrir la unidad",
+      "grupo": "Red",
+      "pregunta": "¿Pide credenciales o acceso denegado al abrir la unidad?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S030",
+      "nombre": "Otros usuarios sí acceden",
+      "grupo": "Red",
+      "pregunta": "¿Otros usuarios sí acceden?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S031",
+      "nombre": "La computadora no enciende",
+      "grupo": "Hardware",
+      "pregunta": "¿La computadora no enciende?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S032",
+      "nombre": "Sin luces ni ventiladores",
+      "grupo": "Hardware",
+      "pregunta": "¿Sin luces ni ventiladores?",
+      "tipo": "falla",
+      "implica": [
+        "S031"
+      ]
+    },
+    {
+      "codigo": "S033",
+      "nombre": "Olor a quemado",
+      "grupo": "Hardware",
+      "pregunta": "¿Olor a quemado?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S034",
+      "nombre": "Enciende sin imagen",
+      "grupo": "Hardware",
+      "pregunta": "¿Enciende sin imagen?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S035",
+      "nombre": "Ventiladores funcionan",
+      "grupo": "Hardware",
+      "pregunta": "¿Ventiladores funcionan?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S036",
+      "nombre": "Pitidos al encender",
+      "grupo": "Hardware",
+      "pregunta": "¿Pitidos al encender?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S037",
+      "nombre": "Monitor en modo ahorro",
+      "grupo": "Hardware",
+      "pregunta": "¿Monitor en modo ahorro?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S038",
+      "nombre": "Proyector no muestra imagen",
+      "grupo": "Hardware",
+      "pregunta": "¿Proyector no muestra imagen?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S039",
+      "nombre": "Cable HDMI conectado",
+      "grupo": "Hardware",
+      "pregunta": "¿Cable HDMI conectado?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S040",
+      "nombre": "Pantalla de laptop normal",
+      "grupo": "Hardware",
+      "pregunta": "¿Pantalla de laptop normal?",
+      "tipo": "contexto",
+      "requiere": {
+        "dispositivo": "Laptop"
+      }
+    },
+    {
+      "codigo": "S041",
+      "nombre": "Proyector indica 'sin señal'",
+      "grupo": "Hardware",
+      "pregunta": "¿Proyector indica 'sin señal'?",
+      "tipo": "falla",
+      "implica": [
+        "S038"
+      ]
+    },
+    {
+      "codigo": "S042",
+      "nombre": "Pantalla con líneas",
+      "grupo": "Hardware",
+      "pregunta": "¿Pantalla con líneas?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S043",
+      "nombre": "Imagen parpadea",
+      "grupo": "Hardware",
+      "pregunta": "¿Imagen parpadea?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S044",
+      "nombre": "Mejora al mover la tapa",
+      "grupo": "Hardware",
+      "pregunta": "¿Mejora al mover la tapa?",
+      "tipo": "falla",
+      "requiere": {
+        "dispositivo": "Laptop"
+      }
+    },
+    {
+      "codigo": "S045",
+      "nombre": "Pantalla azul",
+      "grupo": "Hardware",
+      "pregunta": "¿Pantalla azul?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S046",
+      "nombre": "La computadora se reinicia sola",
+      "grupo": "Hardware",
+      "pregunta": "¿La computadora se reinicia sola?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S047",
+      "nombre": "Equipo lento",
+      "grupo": "Hardware",
+      "pregunta": "¿Equipo lento?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S048",
+      "nombre": "Ocurre tras actualización",
+      "grupo": "Hardware",
+      "pregunta": "¿Ocurre tras actualización?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S049",
+      "nombre": "La computadora se apaga sola",
+      "grupo": "Hardware",
+      "pregunta": "¿La computadora se apaga sola?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S050",
+      "nombre": "Ventilador ruidoso",
+      "grupo": "Hardware",
+      "pregunta": "¿Ventilador ruidoso?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S051",
+      "nombre": "Equipo muy caliente",
+      "grupo": "Hardware",
+      "pregunta": "¿Equipo muy caliente?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S052",
+      "nombre": "Disco al 100 % en administrador de tareas",
+      "grupo": "Hardware",
+      "pregunta": "¿Disco al 100 % en administrador de tareas?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S053",
+      "nombre": "Ruidos en el disco",
+      "grupo": "Hardware",
+      "pregunta": "¿Ruidos en el disco?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S054",
+      "nombre": "Disco casi lleno",
+      "grupo": "Hardware",
+      "pregunta": "¿Disco casi lleno?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S055",
+      "nombre": "Teclado o mouse no responde",
+      "grupo": "Hardware",
+      "pregunta": "¿Teclado o mouse no responde?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S056",
+      "nombre": "Luz del periférico apagada",
+      "grupo": "Hardware",
+      "pregunta": "¿Luz del periférico apagada?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S057",
+      "nombre": "Mouse inalámbrico sin respuesta",
+      "grupo": "Hardware",
+      "pregunta": "¿Mouse inalámbrico sin respuesta?",
+      "tipo": "falla",
+      "implica": [
+        "S055"
+      ]
+    },
+    {
+      "codigo": "S058",
+      "nombre": "Sin sonido",
+      "grupo": "Hardware",
+      "pregunta": "¿Sin sonido?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S059",
+      "nombre": "Parlantes conectados",
+      "grupo": "Hardware",
+      "pregunta": "¿Parlantes conectados?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S060",
+      "nombre": "Ícono de volumen normal",
+      "grupo": "Hardware",
+      "pregunta": "¿Ícono de volumen normal?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S061",
+      "nombre": "Cámara no detectada",
+      "grupo": "Hardware",
+      "pregunta": "¿Cámara no detectada?",
+      "tipo": "falla",
+      "implica": [
+        "S062"
+      ]
+    },
+    {
+      "codigo": "S062",
+      "nombre": "Aplicación de videollamada sin imagen",
+      "grupo": "Hardware",
+      "pregunta": "¿Aplicación de videollamada sin imagen?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S063",
+      "nombre": "Batería no carga",
+      "grupo": "Hardware",
+      "pregunta": "¿Batería no carga?",
+      "tipo": "falla",
+      "requiere": {
+        "dispositivo": "Laptop"
+      }
+    },
+    {
+      "codigo": "S064",
+      "nombre": "Cargador conectado",
+      "grupo": "Hardware",
+      "pregunta": "¿Cargador conectado?",
+      "tipo": "contexto",
+      "requiere": {
+        "dispositivo": "Laptop"
+      }
+    },
+    {
+      "codigo": "S065",
+      "nombre": "Indicador de carga apagado",
+      "grupo": "Hardware",
+      "pregunta": "¿Indicador de carga apagado?",
+      "tipo": "falla",
+      "requiere": {
+        "dispositivo": "Laptop"
+      },
+      "implica": [
+        "S063"
+      ]
+    },
+    {
+      "codigo": "S066",
+      "nombre": "Mensaje 'conectado, no se está cargando'",
+      "grupo": "Hardware",
+      "pregunta": "¿Mensaje 'conectado, no se está cargando'?",
+      "tipo": "falla",
+      "requiere": {
+        "dispositivo": "Laptop"
+      },
+      "implica": [
+        "S063"
+      ]
+    },
+    {
+      "codigo": "S067",
+      "nombre": "Impresora no imprime",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora no imprime?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S068",
+      "nombre": "Documentos en cola",
+      "grupo": "Hardware",
+      "pregunta": "¿Documentos en cola?",
+      "tipo": "falla",
+      "implica": [
+        "S067"
+      ]
+    },
+    {
+      "codigo": "S069",
+      "nombre": "Impresora encendida",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora encendida?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S070",
+      "nombre": "Impresora sin conexión",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora sin conexión?",
+      "tipo": "falla",
+      "implica": [
+        "S067"
+      ]
+    },
+    {
+      "codigo": "S071",
+      "nombre": "Luz de error en impresora",
+      "grupo": "Hardware",
+      "pregunta": "¿Luz de error en impresora?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S072",
+      "nombre": "Mensaje de atasco de papel",
+      "grupo": "Hardware",
+      "pregunta": "¿Mensaje de atasco de papel?",
+      "tipo": "falla",
+      "implica": [
+        "S067"
+      ]
+    },
+    {
+      "codigo": "S073",
+      "nombre": "Impresora no aparece",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora no aparece?",
+      "tipo": "falla",
+      "implica": [
+        "S067"
+      ]
+    },
+    {
+      "codigo": "S074",
+      "nombre": "Impresora en red disponible",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora en red disponible?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S075",
+      "nombre": "Impresión con manchas o tenue",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresión con manchas o tenue?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S076",
+      "nombre": "Impresora imprime",
+      "grupo": "Hardware",
+      "pregunta": "¿Impresora imprime?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S077",
+      "nombre": "Tarda en iniciar",
+      "grupo": "Software",
+      "pregunta": "¿Tarda en iniciar?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S078",
+      "nombre": "Muchos programas al inicio",
+      "grupo": "Software",
+      "pregunta": "¿Muchos programas al inicio?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S079",
+      "nombre": "Ventanas emergentes de publicidad",
+      "grupo": "Software",
+      "pregunta": "¿Ventanas emergentes de publicidad?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S080",
+      "nombre": "Navegador con página de inicio extraña",
+      "grupo": "Software",
+      "pregunta": "¿Navegador con página de inicio extraña?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S081",
+      "nombre": "Memoria RAM al 90 %",
+      "grupo": "Software",
+      "pregunta": "¿Memoria RAM al 90 %?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S082",
+      "nombre": "Muchas pestañas abiertas",
+      "grupo": "Software",
+      "pregunta": "¿Muchas pestañas abiertas?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S083",
+      "nombre": "Actualización atascada",
+      "grupo": "Software",
+      "pregunta": "¿Actualización atascada?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S084",
+      "nombre": "Reinicio en bucle",
+      "grupo": "Software",
+      "pregunta": "¿Reinicio en bucle?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S085",
+      "nombre": "Mensaje 'deshaciendo cambios'",
+      "grupo": "Software",
+      "pregunta": "¿Mensaje 'deshaciendo cambios'?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S086",
+      "nombre": "Perfil temporal",
+      "grupo": "Software",
+      "pregunta": "¿Perfil temporal?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S087",
+      "nombre": "No aparecen archivos del escritorio",
+      "grupo": "Software",
+      "pregunta": "¿No aparecen archivos del escritorio?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S088",
+      "nombre": "Office sin activar",
+      "grupo": "Software",
+      "pregunta": "¿Office sin activar?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S089",
+      "nombre": "Funciones de edición bloqueadas",
+      "grupo": "Software",
+      "pregunta": "¿Funciones de edición bloqueadas?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S090",
+      "nombre": "Mensaje de producto sin licencia",
+      "grupo": "Software",
+      "pregunta": "¿Mensaje de producto sin licencia?",
+      "tipo": "falla",
+      "implica": [
+        "S088"
+      ]
+    },
+    {
+      "codigo": "S091",
+      "nombre": "Archivo no abre",
+      "grupo": "Software",
+      "pregunta": "¿Archivo no abre?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S092",
+      "nombre": "Mensaje de archivo dañado",
+      "grupo": "Software",
+      "pregunta": "¿Mensaje de archivo dañado?",
+      "tipo": "falla",
+      "implica": [
+        "S091"
+      ]
+    },
+    {
+      "codigo": "S093",
+      "nombre": "Correo no sincroniza",
+      "grupo": "Software",
+      "pregunta": "¿Correo no sincroniza?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S094",
+      "nombre": "Outlook desconectado",
+      "grupo": "Software",
+      "pregunta": "¿Outlook desconectado?",
+      "tipo": "falla",
+      "implica": [
+        "S093"
+      ]
+    },
+    {
+      "codigo": "S095",
+      "nombre": "Bandeja sin mensajes nuevos",
+      "grupo": "Software",
+      "pregunta": "¿Bandeja sin mensajes nuevos?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S096",
+      "nombre": "Micrófono no funciona",
+      "grupo": "Software",
+      "pregunta": "¿Micrófono no funciona?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S097",
+      "nombre": "Aplicación de videollamada sin audio de entrada",
+      "grupo": "Software",
+      "pregunta": "¿Aplicación de videollamada sin audio de entrada?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S098",
+      "nombre": "Micrófono detectado por Windows",
+      "grupo": "Software",
+      "pregunta": "¿Micrófono detectado por Windows?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S099",
+      "nombre": "No puede instalar programa",
+      "grupo": "Software",
+      "pregunta": "¿No puede instalar programa?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S100",
+      "nombre": "Pide contraseña de administrador",
+      "grupo": "Software",
+      "pregunta": "¿Pide contraseña de administrador?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S101",
+      "nombre": "Programa no inicia",
+      "grupo": "Software",
+      "pregunta": "¿Programa no inicia?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S102",
+      "nombre": "Error de dependencias",
+      "grupo": "Software",
+      "pregunta": "¿Error de dependencias?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S103",
+      "nombre": "Antivirus bloquea programa",
+      "grupo": "Software",
+      "pregunta": "¿Antivirus bloquea programa?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S104",
+      "nombre": "Archivo puesto en cuarentena",
+      "grupo": "Software",
+      "pregunta": "¿Archivo puesto en cuarentena?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S105",
+      "nombre": "Archivos con extensión extraña",
+      "grupo": "Software",
+      "pregunta": "¿Archivos con extensión extraña?",
+      "tipo": "falla",
+      "implica": [
+        "S091"
+      ]
+    },
+    {
+      "codigo": "S106",
+      "nombre": "Mensaje de rescate",
+      "grupo": "Software",
+      "pregunta": "¿Mensaje de rescate?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S107",
+      "nombre": "No puede iniciar sesión",
+      "grupo": "Cuentas",
+      "pregunta": "¿No puede iniciar sesión?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S108",
+      "nombre": "Contraseña incorrecta",
+      "grupo": "Cuentas",
+      "pregunta": "¿Contraseña incorrecta?",
+      "tipo": "falla",
+      "implica": [
+        "S107"
+      ]
+    },
+    {
+      "codigo": "S109",
+      "nombre": "Cuenta bloqueada",
+      "grupo": "Cuentas",
+      "pregunta": "¿Cuenta bloqueada?",
+      "tipo": "falla",
+      "implica": [
+        "S107"
+      ]
+    },
+    {
+      "codigo": "S110",
+      "nombre": "Contraseña olvidada",
+      "grupo": "Cuentas",
+      "pregunta": "¿Contraseña olvidada?",
+      "tipo": "falla",
+      "implica": [
+        "S107"
+      ]
+    },
+    {
+      "codigo": "S111",
+      "nombre": "Contraseña vencida",
+      "grupo": "Cuentas",
+      "pregunta": "¿Contraseña vencida?",
+      "tipo": "falla",
+      "implica": [
+        "S107"
+      ]
+    },
+    {
+      "codigo": "S112",
+      "nombre": "Mensaje de cambio obligatorio",
+      "grupo": "Cuentas",
+      "pregunta": "¿Mensaje de cambio obligatorio?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S113",
+      "nombre": "No llega código de verificación",
+      "grupo": "Cuentas",
+      "pregunta": "¿No llega código de verificación?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S114",
+      "nombre": "Doble factor activo",
+      "grupo": "Cuentas",
+      "pregunta": "¿Doble factor activo?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S115",
+      "nombre": "Cambió de celular",
+      "grupo": "Cuentas",
+      "pregunta": "¿Cambió de celular?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S116",
+      "nombre": "No puede guardar archivos",
+      "grupo": "Hardware",
+      "pregunta": "¿No puede guardar archivos?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S117",
+      "nombre": "Aparece una página de inicio de sesión de la red",
+      "grupo": "Red",
+      "pregunta": "¿Aparece una página de inicio de sesión de la red?",
+      "tipo": "falla",
+      "implica": [
+        "S009"
+      ]
+    },
+    {
+      "codigo": "S118",
+      "nombre": "El periférico se apaga o se desconecta solo",
+      "grupo": "Hardware",
+      "pregunta": "¿El periférico se apaga o se desconecta solo?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S119",
+      "nombre": "Periférico con cable USB",
+      "grupo": "Hardware",
+      "pregunta": "¿Periférico con cable USB?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S120",
+      "nombre": "Periférico inalámbrico con receptor USB",
+      "grupo": "Hardware",
+      "pregunta": "¿Periférico inalámbrico con receptor USB?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S121",
+      "nombre": "Periférico conectado por Bluetooth",
+      "grupo": "Hardware",
+      "pregunta": "¿Periférico conectado por Bluetooth?",
+      "tipo": "contexto"
+    },
+    {
+      "codigo": "S122",
+      "nombre": "Audífonos o parlantes se cortan o pierden el sonido",
+      "grupo": "Hardware",
+      "pregunta": "¿Audífonos o parlantes se cortan o pierden el sonido?",
+      "tipo": "falla"
+    },
+    {
+      "codigo": "S123",
+      "nombre": "El sonido vuelve al mover el cable",
+      "grupo": "Hardware",
+      "pregunta": "¿El sonido vuelve al mover el cable?",
+      "tipo": "falla",
+      "implica": [
+        "S122"
+      ]
+    }
+  ],
+  "excluyentes": [
+    {
+      "sintomas": [
+        "S119",
+        "S120",
+        "S121"
+      ],
+      "motivo": "Tipo de conexión del periférico: cable USB, receptor inalámbrico o Bluetooth"
+    },
+    {
+      "sintomas": [
+        "S002",
+        "S004"
+      ],
+      "motivo": "La luz de enlace está encendida o apagada"
+    },
+    {
+      "sintomas": [
+        "S031",
+        "S034"
+      ],
+      "motivo": "La computadora no enciende o enciende sin imagen"
+    },
+    {
+      "sintomas": [
+        "S032",
+        "S035"
+      ],
+      "motivo": "Sin luces ni ventiladores o con ventiladores funcionando"
+    },
+    {
+      "sintomas": [
+        "S067",
+        "S076"
+      ],
+      "motivo": "La impresora imprime o no imprime"
+    },
+    {
+      "sintomas": [
+        "S013",
+        "S009"
+      ],
+      "motivo": "No aparecen redes Wi-Fi o ya está conectado"
+    },
+    {
+      "sintomas": [
+        "S057",
+        "S119"
+      ],
+      "motivo": "Un mouse inalámbrico no está conectado por cable USB"
+    }
+  ],
+  "inferencia": {
+    "descripcion": "«implica» indica que un síntoma específico supone otro más general (p. ej. «IP 169.254.x.x» supone «Sin acceso a internet»). Antes de comparar, el motor agrega al ticket y a cada caso los síntomas generales que se deducen de los específicos (cierre transitivo). Así un síntoma general que el técnico marcó no se toma por una segunda falla cuando el caso lo explica a través de un síntoma específico.",
+    "fuente": "[8] Sec. 5 (Identify Features)",
+    "evidencia": "To understand a problem involves to filter out noisy problem descriptors, to infer other relevant problem features, to check whether the feature values make sense within the context [...] Other descriptors than those given as input, may be inferred by using a general knowledge model",
+    "criterio": "Solo se declara «A implica B» cuando B es consecuencia directa del enunciado de A (relación de significado entre los síntomas del catálogo, no una causa probable)."
+  }
+}

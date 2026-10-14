@@ -1,0 +1,1070 @@
+============================================================================================
+                                    MEMORIA DESCRIPTIVA                                     
+                   SISTEMA EXPERTO BASADO EN CASOS PARA UNA MESA DE AYUDA                   
+                            DE FALLAS DE RED Y COMPUTADORES (P9)                            
+============================================================================================
+
+Universidad      : Universidad Católica Santo Toribio de Mogrovejo (USAT), Chiclayo
+Escuela          : Ingeniería de Sistemas y Computación
+Curso            : Inteligencia Artificial – Grupo B (2026-II)
+Docente          : Villegas Cubas, Juan Elías
+Integrantes      : Timana Novoa, Juan Diego
+                   Seminario Bautista, Lorena Marialya
+Versión          : 2.3 (octubre de 2026) – base de conocimientos en JSON y validada con fuentes
+Lenguaje         : Python 3.9 o superior · Interfaz: Streamlit
+
+============================================================================================
+1. DESCRIPCIÓN GENERAL
+============================================================================================
+
+El sistema apoya al técnico de soporte de 1.er nivel de una institución educativa cuando
+recibe un reporte de falla de red o de computador. El técnico registra el ticket eligiendo
+la categoría, el dispositivo, el sistema operativo, el tipo de conexión y de 1 a 3 síntomas
+de un catálogo cerrado. El sistema recupera los 3 tickets resueltos y validados más
+parecidos, propone la causa probable y la solución del más similar (adaptada si cambia el
+sistema operativo, la conexión o el equipo), indica cuándo escalar a 2.º nivel y explica su
+decisión: el aporte de cada dato a la similitud y la fuente que respalda la causa y la
+solución. Cuando la solución funciona, el caso se retiene para el futuro, protegido con la
+clave de administrador.
+
+Enfoque: razonamiento basado en casos (RBC) con el ciclo recuperar – reutilizar – revisar –
+retener de Aamodt y Plaza [8].
+
+============================================================================================
+2. ALCANCE Y LIMITACIONES
+============================================================================================
+
+  - Incluye: fallas de red (conectividad cableada, IP, Wi-Fi, navegador y proxy, recursos
+    compartidos), hardware (encendido, video, estabilidad, almacenamiento, periféricos,
+    batería, impresión), software (rendimiento, sistema operativo, ofimática, instalación,
+    seguridad) y cuentas (acceso y autenticación).
+  - Equipos: PC de escritorio y laptops con Windows 10, Windows 11 o Ubuntu 22.04.
+  - Queda fuera: servidores, redes troncales, reparación electrónica, recuperación de datos,
+    móviles y macOS.
+  - No interpreta texto libre: los síntomas se eligen del catálogo cerrado.
+  - No ejecuta acciones en el equipo del usuario: orienta, y la decisión final es del
+    técnico.
+  - Los casos son casos de referencia construidos a partir de documentación técnica oficial
+    (no hubo un técnico experto disponible); su contenido está respaldado por fuente, no por
+    tickets reales de la institución.
+  - No guarda datos personales de los usuarios.
+
+============================================================================================
+3. ARQUITECTURA
+============================================================================================
+
+
+   +----------------------+       +----------------------------------------------+
+   | INTERFAZ             |       | MOTOR DE INFERENCIA (motor_inferencia.py)    |
+   | (interfaz.py)        | ----> | 1. Recuperar   similitud ponderada, k = 3    |
+   | Inicio, Manual,      |       | 2. Reutilizar  reglas R1-R5                  |
+   | Nuevo ticket, Base,  | <---- | 3. Revisar     técnico + conformidad         |
+   | Administrar,         |       | 4. Retener     con clave, umbral 0,90        |
+   | Validación, Fuentes  |       | Explicación, administración, verificación    |
+   +----------------------+       +----------------------+-----------------------+
+                                                         |  lee y escribe JSON
+                                  +----------------------v-----------------------+
+                                  | BASE DE CONOCIMIENTOS (base_conocimientos/)  |
+                                  | casos, catálogo, categorías, similitud y     |
+                                  | parámetros, reglas, estructura, fuentes      |
+                                  +----------------------------------------------+
+
+Los cuatro contenedores de conocimiento de un sistema RBC [9] son el vocabulario (catálogo
+de síntomas y árbol de categorías), la medida de similitud, la base de casos y el
+conocimiento de adaptación (reglas). Cada uno está en su propio archivo JSON.
+
+============================================================================================
+4. ESTRUCTURA DE ARCHIVOS
+============================================================================================
+
+
+pry_p9/
+├── interfaz.py                    Interfaz web (Streamlit), con Inicio y Manual de uso
+├── motor_inferencia.py            Motor de inferencia, administración, verificación y validación
+├── memoria_descriptiva.txt        Este documento
+├── requirements.txt               Dependencias (streamlit)
+├── ejecutar.bat                   Instala y abre la interfaz en Windows (doble clic)
+├── .streamlit/config.toml         Colores de la interfaz
+└── base_conocimientos/
+    ├── casos.json                 Base de casos con su respaldo documental
+    ├── catalogo_sintomas.json     Vocabulario cerrado de síntomas
+    ├── categorias.json            Árbol de categorías (tipificación)
+    ├── similitud_y_parametros.json Pesos, similitudes locales, k, umbrales, desempates
+    ├── reglas_adaptacion.json     Reglas R1–R5 con sus fuentes y evidencias
+    ├── estructura_caso.json       Atributos del caso y su papel
+    └── fuentes.json               Fuentes metodológicas [1]–[12] y técnicas T01–Tnn
+└── validacion/
+    └── casos_prueba.json          Casos de prueba con su respuesta esperada (no están en la base)
+
+============================================================================================
+5. BASE DE CONOCIMIENTOS
+============================================================================================
+
+
+5.1 Formato
+-----------
+La base pasó de un libro de Excel a archivos JSON (texto UTF-8). Ventajas: se lee en
+cualquier editor, Python la carga sin librerías extra, el sistema puede escribir casos
+nuevos de forma segura (escritura atómica: se escribe un temporal y luego se reemplaza el
+archivo) y cada caso lleva anidado su respaldo documental.
+
+5.2 Contenido actual
+--------------------
+  - Tickets: 128 (Hardware 56, Red 38, Software 26, Cuentas 8); 96 resueltos en 1.er nivel y
+    32 en 2.º nivel.
+  - Fallas distintas: 64. Cada falla tiene al menos dos tickets: el original (64) y su
+    repetición en otro equipo (64), con el mismo diagnóstico, la misma solución y el mismo
+    respaldo documental. La repetición cambia al menos dos de: dispositivo, sistema
+    operativo y conexión, solo en equipos donde la solución escrita vale tal cual. Así
+    ocurre en una mesa de ayuda real («los equipos de soporte repiten diagnósticos», ficha
+    P9) y permite validar dejando un caso fuera por diagnóstico.
+  - Estado de validación: 100 «Validado» (causa y solución respaldadas) y 28 «Validado
+    parcialmente» (una de las dos se deduce; la limitación está escrita en el caso). 0 casos
+    sin respaldo.
+  - Síntomas en el catálogo: 123. Subcategorías: 19 en 4 categorías. 34 síntomas específicos
+    declaran el síntoma general que implican (p. ej. «IP 169.254.x.x» → «Sin acceso a
+    internet»), ver 6.1.
+  - Fuentes: 12 metodológicas y 82 técnicas; 139 evidencias (fragmentos literales) en los
+    casos originales.
+
+5.3 Cómo se validó cada caso (sin experto)
+------------------------------------------
+El docente pidió que cada caso esté validado. Como no hubo un técnico experto, cada caso se
+validó con documentación técnica oficial y de fácil acceso. El procedimiento fue:
+  1. Buscar, para cada caso, páginas oficiales del fabricante o proveedor (Microsoft Learn y
+     Soporte, Dell, Epson, Brother, Lenovo, Cisco, Google, Mozilla, Red Hat, GNOME), páginas
+     de manual (Ubuntu, Debian, systemd) y guías de organismos (CISA, INCIBE). Se excluyeron
+     foros, blogs, Wikipedia y sitios comerciales.
+  2. Abrir cada página y copiar un fragmento literal (máx. 30 palabras) que respalde los
+     síntomas, la causa o la solución. Se registran la fuente (código T), la sección, el
+     fragmento y una nota.
+  3. Verificación independiente: un segundo revisor volvió a abrir las 120 evidencias de
+     casos y reglas. Todas las páginas cargaron y todos los fragmentos aparecían en su
+     página. Donde un fragmento respaldaba solo una parte (por ejemplo, la solución y no la
+     causa), se corrigió el campo «respalda» y se agregó la oración literal que cubre la
+     parte faltante.
+  4. Corregir los casos cuya causa o solución no coincidía con la fuente (ver 5.4).
+  5. Calcular el estado: «Validado» si la causa y la solución tienen respaldo; si no,
+     «Validado parcialmente», con la limitación escrita en el caso.
+
+5.4 Correcciones a la base respecto de la versión en Excel
+----------------------------------------------------------
+  - TK-002: Se retiró «reiniciar el servicio Cliente DNS»: ninguna fuente oficial lo
+    respalda. Causa redactada según Microsoft: la caché guarda respuestas incorrectas o
+    desactualizadas.
+  - TK-006: El usuario no debe elegir una IP «libre» por su cuenta; la asigna redes (MS
+    DHCP).
+  - TK-007: Se precisó la causa probable al escalar.
+  - TK-010: Se agregó el criterio de escalamiento.
+  - TK-012: La documentación advierte que sin certificado CA la conexión queda expuesta.
+  - TK-014: Síntoma duplicado reemplazado por el síntoma propio del portal cautivo.
+  - TK-015: Se añadió la verificación previa y la causa raíz.
+  - TK-017: Cambiar la pila CMOS exige abrir el equipo: 2.º nivel.
+  - TK-021: La fuente indica desconectar ante olor a quemado; no respalda «variación de
+    voltaje» como causa.
+  - TK-022: Abrir el equipo es de 2.º nivel; la limpieza con borrador no figura en fuentes
+    oficiales.
+  - TK-026: La fuente respalda aislar con monitor externo, pero no nombra el cable flex. La
+    solución ya no menciona el cable flex: se aísla con monitor externo y se deriva.
+  - TK-029: El cambio de pasta térmica queda como paso condicional.
+  - TK-030: La limpieza externa es de 1.er nivel; abrir la laptop es de 2.º nivel.
+  - TK-031: Se agregó la confirmación previa al reemplazo. Causa y solución alineadas con
+    Dell: confirmar con la prueba de disco antes de reemplazar.
+  - TK-032: Síntoma duplicado reemplazado; procedimiento actualizado a Windows 11. Solución
+    alineada con Microsoft: Sensor de almacenamiento y Archivos a petición de OneDrive.
+  - TK-036: Se añadió la revisión del obturador físico.
+  - TK-038: Dell indica revisar la configuración de batería de la BIOS antes del reemplazo.
+  - TK-040: Fijar la IP de la impresora corresponde al área de redes.
+  - TK-041: Brother indica esperar a que se enfríen las piezas internas.
+  - TK-042: Primero se intenta el asistente de Windows.
+  - TK-043: La limpieza de cabezales aplica a impresoras de tinta, no de tóner.
+  - TK-046: Solución alineada con Microsoft: cerrar aplicaciones y pestañas; la ampliación
+    de RAM se deriva.
+  - TK-047: Microsoft respalda desinstalar desde WinRE; no respalda el modo seguro ni la
+    causa «apagado».
+  - TK-048: Síntoma duplicado eliminado; la edición del registro no quedó respaldada. Causa
+    redactada según Microsoft: Windows no puede cargar el perfil y crea uno temporal.
+  - TK-051: Microsoft indica reparar antes de crear un perfil nuevo.
+  - TK-052: Se añadió el permiso de micrófono de Windows.
+  - TK-054: Comando exacto según la página de manual de apt-get.
+  - TK-055: Microsoft indica confirmar el falso positivo antes de excluir.
+  - TK-056: Procedimiento de CISA e INCIBE.
+  - TK-058: Se añadió el caso sin método registrado.
+  - TK-061: Caso agregado en la revisión de coherencia: faltaban fallas de periféricos que
+    se apagan o desconectan.
+  - TK-062: Caso agregado en la revisión de coherencia: faltaban fallas de periféricos que
+    se apagan o desconectan.
+  - TK-063: Caso agregado en la revisión de coherencia: faltaban fallas de periféricos que
+    se apagan o desconectan.
+  - TK-064: Caso agregado en la revisión de coherencia: faltaban fallas de periféricos que
+    se apagan o desconectan.
+  - Revisión de coherencia (14/10): se agregaron TK-061 a TK-064 (periféricos que se apagan
+    o desconectan: cable o puerto USB y ahorro de energía, pilas o receptor, Bluetooth y
+    cable de audífonos), con las fuentes T82 (Microsoft, Bluetooth) y T83 (Logitech); se
+    renombraron S031, S046 y S049 a «La computadora no enciende / se reinicia sola / se
+    apaga sola» para que no se confundan con un periférico; se agregaron S118–S123, el tipo
+    «falla» o «contexto» de cada síntoma y 7 grupos de síntomas excluyentes.
+  - TK-014, TK-032 y TK-048 tenían un síntoma repetido; se reemplazó o eliminó. Se agregaron
+    los síntomas S116 «No puede guardar archivos» y S117 «Aparece una página de inicio de
+    sesión de la red», y S029 pasó a «Pide credenciales o acceso denegado al abrir la
+    unidad».
+  - Revisión final (v2.3): se agregó un ticket repetido por cada falla (TK-065 a TK-128), la
+    relación «implica» entre síntomas, y se retiraron las fuentes CompTIA, Delaware,
+    Vanderbilt y Google SRE (no eran necesarias: las reglas R4 y R5 ya se respaldan en [1],
+    [2] y [4]); la antigua [17] (NIST) pasó a ser [12].
+  - Las referencias a páginas de [1] usan la numeración impresa: p. 9, 60 y 224 (en el visor
+    de PDF son 31, 82 y 246).
+
+5.5 Casos con respaldo parcial
+------------------------------
+  - TK-012 (Wi-Fi): Las fuentes respaldan la configuración correcta (PEAP, MSCHAPv2 y
+    certificado CA); que la falla venga de una configuración distinta se deduce de que el
+    equipo vuelve a pedir la contraseña.
+  - TK-015 (Navegador y proxy): La fuente respalda la causa (un programa puede cambiar la
+    configuración del proxy); el paso de desactivar el proxy no tiene una cita literal
+    registrada.
+  - TK-019 (Recursos compartidos): Las fuentes respaldan el procedimiento (borrar la
+    credencial y volver a asignar la unidad); el vínculo síntoma–causa se infiere.
+  - TK-021 (Encendido): La fuente respalda la causa (señales de falla de la fuente de
+    poder); desconectar y derivar a 2.º nivel se apoya en la regla R4.
+  - TK-025 (Video): La fuente respalda la solución (probar otro cable); que el cable esté
+    dañado se deduce de que el cambio resuelve la falla.
+  - TK-026 (Video): La fuente respalda aislar con monitor externo y derivar a reparación,
+    pero no distingue panel de cable interno.
+  - TK-027 (Estabilidad): Las fuentes respaldan ejecutar el diagnóstico de memoria; que el
+    módulo esté defectuoso lo confirma ese diagnóstico.
+  - TK-041 (Impresión): La fuente respalda el procedimiento para retirar el papel; el atasco
+    es el propio síntoma.
+  - TK-042 (Impresión): Las fuentes respaldan agregar la impresora con su controlador; que
+    faltara el controlador se deduce de que la impresora no aparecía.
+  - TK-047 (Sistema operativo): La fuente respalda desinstalar la actualización desde WinRE;
+    la causa exacta de la falla de instalación no se documenta.
+  - TK-048 (Sistema operativo): La fuente respalda crear un perfil nuevo y copiar los datos;
+    la edición del registro no quedó respaldada y se deja a 2.º nivel.
+  - TK-052 (Ofimática): Las fuentes respaldan elegir el micrófono en la aplicación y revisar
+    el permiso; que estuviera elegido otro micrófono se deduce de que Windows sí lo detecta.
+  - TK-058 (Acceso): La causa es el propio reporte del usuario (olvidó su contraseña); las
+    fuentes respaldan el procedimiento de restablecimiento.
+  - TK-060 (Autenticación): La fuente respalda eliminar el método anterior y registrar uno
+    nuevo; el cambio de celular es el contexto del usuario.
+
+============================================================================================
+6. MOTOR DE INFERENCIA
+============================================================================================
+
+
+6.1 Recuperar
+-------------
+Similitud global: Sim(nuevo, caso) = Σ wj · simj(nuevo, caso), con Σ wj = 1 ([6] Ec. 5). Se
+devuelven hasta k = 3 casos ([9] Sec. 3.1.1). Antes de comparar se filtran los candidatos:
+  - Solo casos «Validado» o «Validado parcialmente» ([1] p. 9).
+  - Inferencia de síntomas: antes de comparar, el ticket y cada caso se completan con los
+    síntomas generales que se deducen de los específicos (cierre de «implica»; p. ej. «IP
+    169.254.x.x» → «Sin acceso a internet» → «Páginas no cargan»). Así un síntoma general
+    marcado no se toma por una segunda falla ([8] Sec. 5, Identify Features: «to infer other
+    relevant problem features»). En la interfaz se muestran como «inferido».
+  - Solo casos que explican al menos un síntoma de FALLA que el técnico marcó (no basta un
+    síntoma general inferido); los síntomas de «contexto» (p. ej. «Periférico con cable
+    USB») afinan la búsqueda pero no recuperan casos por sí solos ([8] Sec. 5).
+  - Búsqueda por niveles del árbol: primero la misma subcategoría; si no hay casos, la
+    categoría; luego toda la base ([7] Sec. 3.2).
+  - Solo casos cuya solución aplica al sistema operativo del ticket (campo so_aplicable): 23
+    soluciones son solo de Windows y 1 solo de Ubuntu ([9] Sec. 4).
+  - Solo casos cuya solución tiene sentido para la conexión y el dispositivo del ticket
+    (campos conexion_aplicable y dispositivo_aplicable): p. ej. «acercarse al punto de
+    acceso» solo para Wi-Fi y «batería» solo para laptop. Antes de buscar se revisa que el
+    ticket no se contradiga (subcategoría Wi-Fi con conexión cableada, síntoma de batería en
+    una PC); la interfaz fija la conexión o el dispositivo que exige la subcategoría.
+  - Se descartan casos que contradicen un síntoma del ticket (grupos excluyentes, p. ej.
+    cable USB frente a Bluetooth, o luz de enlace encendida frente a apagada).
+
+   Atributo           Similitud local                                   Peso   Fuente del método
+   Síntomas           Índice de Jaccard |A∩B| / |A∪B| sobre los código  0.7    [3] Ec. 2
+   Subcategoría       Árbol: 1 misma subcategoría; 0,5 misma categoría  0.12   [6] Ec. 4 (similitud por árbol); [7] Sec
+   Dispositivo        Coincidencia exacta (1 / 0)                       0.06   [6] Ec. 1
+   Sistema operativo  1 igual; 0,5 misma familia (Windows 10 / 11); 0   0.06   [6] Ec. 1 y Ec. 4
+   Conexión           Coincidencia exacta (1 / 0)                       0.06   [6] Ec. 1
+
+Desempates: 1) Más veces aplicada con éxito (idoneidad) ([7] Sec. 3.3); 2) Resuelto en 1.er
+nivel antes que en 2.º ([4] p. 38; [2] p. 41); 3) Menor tiempo de resolución ([4] p. 98
+(tiempo promedio de resolución como métrica)); 4) Caso más reciente (Decisión de diseño ([8]
+Sec. 5, tarea Select)).
+Umbral mínimo: si el mejor caso no llega a 40% o no comparte ningún síntoma, no se propone
+solución y se escala ([8] Sec. 5; [4] p. 38; [1] p. 60).
+
+6.2 Cuándo propone, cuándo pregunta y cuándo escala
+---------------------------------------------------
+El sistema no adivina. Antes de proponer la solución del mejor caso comprueba:
+  - Umbral mínimo de 40%; si no se alcanza, escala ([8] Sec. 5; [4] p. 38).
+  - Si el caso es de otra subcategoría, debe compartir al menos la mitad de los síntomas; si
+    no, avisa que su solución no corresponde a la falla y pide revisar la subcategoría o
+    escalar ([7] Sec. 3.2).
+  - Nunca propone una solución que deje sin explicar un síntoma de falla marcado. Si otro
+    caso lo explica, indica qué síntoma corresponde a cada caso: pueden ser dos fallas
+    distintas (un ticket por cada una, p. ej. el mouse y los audífonos) o una falla que la
+    base aún no tiene (escalar). Si ningún caso aplicable lo explica, pide revisar ese
+    síntoma o escalar ([8] Sec. 5, Select; [4] p. 38).
+  - Si el ticket confirma menos de la mitad de los síntomas del caso, o si otro caso con
+    otra causa explica los mismos síntomas del ticket, PREGUNTA por los síntomas que los
+    distinguen, con un botón para agregarlos ([8] Sec. 5, p. 16: «asking the user for
+    confirmation and additional information»; [9] Sec. 3.3.5; [7] p. 5).
+  - Si el caso supone un dato que el ticket no indicó (p. ej. que el periférico es
+    inalámbrico) y otro caso de la subcategoría supone el valor contrario (cable USB,
+    Bluetooth), pregunta primero, aunque esa otra solución no aplique a este equipo. Si
+    ningún caso lo distingue, propone y avisa «El caso supone X: confírmelo» ([9] Sec.
+    3.3.5: se pregunta lo que distingue entre candidatos).
+  - Si dos casos tienen exactamente los mismos síntomas y causas distintas, propone el más
+    parecido y muestra el otro como alternativa «si no funciona». Si el ticket confirma
+    todos los síntomas del caso, los casos que necesitarían síntomas adicionales se muestran
+    como nota («si además hay…»).
+
+6.3 Reutilizar (reglas de adaptación)
+-------------------------------------
+  - R1 (Sustitución): SI El caso recuperado es de Windows y el ticket nuevo es de Ubuntu (o
+    al revés) ENTONCES Sustituir los comandos del sistema operativo por su equivalente
+    documentado. Fuentes: [9] Sec. 4; [8] Sec. 6.
+  - R2 (Sustitución): SI El caso recuperado es de conexión cableada y el ticket nuevo es Wi-
+    Fi (o al revés) ENTONCES Sustituir la verificación física del cable por la verificación
+    equivalente del Wi-Fi. Fuentes: [9] Sec. 4; T54; T72.
+  - R3 (Sustitución): SI El caso recuperado es de PC de escritorio y el ticket nuevo es de
+    laptop (o al revés) ENTONCES Sustituir los componentes de energía y puertos que cambian
+    entre equipos. Fuentes: [9] Sec. 4; T12.
+  - R4 (Escalamiento): SI El caso recuperado se resolvió en 2.º nivel ENTONCES Mostrar la
+    causa probable y la indicación «derivar a 2.º nivel», sin pedir al técnico de 1.er nivel
+    que ejecute la reparación. Fuentes: [4] p. 38; [2] p. 41; [1] p. 60; [12] Sec. 2.3.1.
+  - R5 (Escalamiento): SI El ticket nuevo incluye el síntoma «Varios usuarios con el mismo
+    fallo» ENTONCES Tratarlo como posible PROBLEMA (causa común de varios incidentes) y
+    escalar a 2.º nivel aunque el caso recuperado sea de 1.er nivel. Fuentes: [4] p. 184;
+    [1] p. 224.
+Equivalencias de R1 (cada una con su fuente oficial): ipconfig /flushdns → resolvectl flush-
+caches; ipconfig /release → sudo dhclient -r; ipconfig /renew → sudo dhclient; ipconfig /all
+→ nmcli device show.
+
+6.4 Revisar
+-----------
+El técnico indica si la solución funcionó y si el usuario dio su conformidad ([8] Sec. 7;
+[4] p. 49). Si no, el ticket no se retiene y se escala ([4] p. 38).
+
+6.5 Retener
+-----------
+Requiere la clave de administrador. Si existe un caso validado con similitud ≥ 90% y la
+misma solución, se suma 1 a «veces aplicada con éxito» (idoneidad, [7] Sec. 3.3–3.5; evita
+duplicados [11]). Si no, se crea un caso nuevo con estado «Pendiente», que no se usa para
+recomendar hasta que el administrador le agregue su respaldo documental ([1] p. 9).
+
+6.6 Explicación
+---------------
+Para cada caso sugerido se muestra el aporte de cada atributo (similitud local × peso) con
+la fuente del método, los síntomas en común y el respaldo documental del caso ([9] Sec.
+3.3.5). La «Justificación completa de la decisión» resume, paso por paso, por qué el sistema
+decidió así y qué fuente respalda cada paso. La pestaña «Fuentes y justificación» trae
+preguntas y respuestas para la sustentación y la matriz de trazabilidad elemento → fuente.
+
+6.7 Funciones principales
+-------------------------
+  - BaseConocimientos: carga y guarda los JSON; consulta de fuentes por «[n]» o «Tnn».
+  - similitud_global(), sim_sintomas() (Jaccard), sim_subcategoria() (árbol), sim_so(),
+    sim_exacta().
+  - MotorInferencia.recuperar(), reutilizar(), revisar(), retener(), resolver(), explicar(),
+    justificar().
+  - agregar_caso(), validar_caso(), rechazar_caso(), agregar_fuente_tecnica(),
+    agregar_sintoma() (con clave).
+  - MotorInferencia.preguntas() (síntomas que distinguen entre candidatos).
+  - BaseConocimientos.cerrar() y preparar() (inferencia de síntomas generales).
+  - verificar_base(), validar_loo(), evaluar_casos_prueba(), analisis_sensibilidad(),
+    auditar_coherencia().
+
+============================================================================================
+7. ADMINISTRACIÓN Y SEGURIDAD
+============================================================================================
+
+  - Clave de administrador: Admin2026 (distingue mayúsculas).
+  - El código no guarda la clave en texto: guarda su huella SHA-256 y la compara en tiempo
+    constante (hmac.compare_digest). Para cambiarla, reemplace CLAVE_ADMIN_SHA256 en
+    motor_inferencia.py por la huella de la nueva clave.
+  - Requieren clave: retener un ticket confirmado, agregar un caso, validar o eliminar un
+    pendiente, registrar una fuente y agregar un síntoma. Con una clave incorrecta no se
+    modifica ningún archivo.
+  - Un caso nuevo exige: subcategoría válida, 1 a 3 síntomas del catálogo, objeto, causa,
+    solución y al menos una fuente registrada. Sin fuente queda «Pendiente». Se rechazan
+    duplicados.
+
+============================================================================================
+8. INTERFAZ DE USUARIO (pestañas)
+============================================================================================
+
+  - Inicio: qué hace el sistema, cómo razona, cómo se validó la base y todas las fuentes
+    utilizadas.
+  - Manual de uso: guía paso a paso antes de usar el sistema y problemas frecuentes.
+  - Nuevo ticket: registro del ticket (con botón «Cargar ejemplo»), los 3 casos más
+    parecidos, su respaldo, la solución propuesta, la justificación completa y la revisión
+    del técnico.
+  - Base de casos: tabla filtrable y detalle de cada caso con sus fuentes y fragmentos
+    literales.
+  - Administrar casos (clave): agregar caso, validar pendientes, agregar fuente y agregar
+    síntoma.
+  - Validación: validación dejando un caso fuera, casos de prueba, análisis de sensibilidad,
+    auditoría de coherencia y verificación de la base.
+  - Fuentes y justificación: preguntas y respuestas con fuentes, matriz de trazabilidad y
+    listas de fuentes.
+
+============================================================================================
+9. VALIDACIÓN Y VERIFICACIÓN (resultados actuales)
+============================================================================================
+
+
+9.1 Validación dejando un caso fuera (ficha P9: «exactitud y acierto en los 3 primeros»)
+----------------------------------------------------------------------------------------
+Cada ticket validado se usa como ticket nuevo contra el resto de la base. La respuesta es
+correcta si el caso recuperado tiene el mismo diagnóstico (causa).
+  - Tickets evaluados: 128 · exactitud top-1 = 85.2% · acierto en los 3 primeros = 100.0% ·
+    similitud media del caso recuperado = 0.88.
+  - Por subcategoría: top-1 = 100.0%.
+  - Fallos en el 1.er lugar: TK-001 → TK-002, TK-002 → TK-001, TK-003 → TK-004, TK-004 →
+    TK-003, TK-011 → TK-076, TK-012 → TK-011, TK-017 → TK-018, TK-018 → TK-017, TK-030 →
+    TK-093, TK-065 → TK-066, TK-066 → TK-065, TK-067 → TK-068, TK-068 → TK-067, TK-075 →
+    TK-076, TK-076 → TK-075, TK-081 → TK-082, TK-082 → TK-081, TK-093 → TK-030, TK-094 →
+    TK-093. En todos, el ticket tiene exactamente los mismos síntomas que otra falla (p. ej.
+    DNS manual frente a caché DNS; cable desconectado frente a RJ45 dañado); ningún sistema
+    puede distinguirlas con esos datos, y la causa correcta queda entre los 3 primeros y
+    como alternativa «si no funciona».
+
+9.2 Casos de prueba (requisitos comunes: al menos 50 casos de prueba)
+---------------------------------------------------------------------
+75 tickets simulados que NO están en la base (validacion/casos_prueba.json): típicos (falla
+conocida con síntomas parciales y en otro equipo), difíciles (síntoma general, causas
+parecidas, adaptación a otro sistema operativo) y límite (ticket contradictorio, fuera de
+alcance o sin síntoma de falla). La respuesta esperada la definió el equipo ANTES de
+ejecutar el sistema, a partir de la fuente técnica de la falla esperada (no hubo experto).
+  - Exactitud = 98.7% · acierto en los 3 primeros = 100.0% · similitud media = 0.82. Por
+    tipo: típico 55/55, difícil 13/14, límite 6/6.
+  - No coincide CP-58 (difícil): se esperaba «preguntar» y el sistema respondió «proponer»
+    (TK-007). Con «Conectado sin internet» e «IP 169.254.x.x» el ticket confirma todos los
+    síntomas de TK-007 (APIPA en un equipo), así que lo propone y deja «Pool DHCP agotado»
+    como nota «si además hay varios usuarios». Es una diferencia de criterio: se documenta y
+    no se cambió la respuesta esperada después de ejecutar el sistema.
+
+9.3 Auditoría de coherencia
+---------------------------
+python motor_inferencia.py --auditar: todas las combinaciones de 1 y 2 síntomas de cada
+subcategoría en 8 equipos (PC y laptop; Windows y Ubuntu; cableada y Wi-Fi), sin
+combinaciones imposibles, más cada caso con sus propios síntomas.
+  - Consultas probadas: 4172 · propone: 1318 · pide más datos: 1605 · escala o avisa: 1249 ·
+    problemas de coherencia: 0.
+  - Se considera problema: proponer una solución que no aplica al equipo, contradecir un
+    síntoma del ticket, dejar sin explicar un síntoma de falla marcado, o que un caso con
+    sus propios síntomas no recupere su diagnóstico.
+
+9.4 Análisis de sensibilidad (justifica los valores, como [7] Sec. 3.5 y [6] Tabla 5)
+-------------------------------------------------------------------------------------
+   Peso de síntomas 0.4         : LOO top-1 69.5% · top-3 98.4% · robustez al contexto 100.0%
+   Peso de síntomas 0.5         : LOO top-1 79.7% · top-3 100.0% · robustez al contexto 100.0%
+   Peso de síntomas 0.6         : LOO top-1 82.0% · top-3 100.0% · robustez al contexto 100.0%
+   Peso de síntomas 0.7 (actual): LOO top-1 85.2% · top-3 100.0% · robustez al contexto 100.0%
+   Peso de síntomas 0.8         : LOO top-1 85.2% · top-3 100.0% · robustez al contexto 100.0%
+   Umbral 0.30         : exactitud en casos de prueba 98.7% · propone cuando debía 100.0%
+   Umbral 0.40 (actual): exactitud en casos de prueba 98.7% · propone cuando debía 100.0%
+   Umbral 0.50         : exactitud en casos de prueba 98.7% · propone cuando debía 100.0%
+   Umbral 0.60         : exactitud en casos de prueba 93.3% · propone cuando debía 100.0%
+Los síntomas distinguen la causa ([4] p. 37 y p. 49). Se eligió 0,7 con el análisis de
+sensibilidad (pestaña Validación): es el menor valor con el mayor acierto del diagnóstico en
+la validación dejando un caso fuera (85,2 % frente a 82,0 % con 0,6 y 79,7 % con 0,5; con
+0,8 no mejora) y mantiene 100 % de robustez al contexto. El resto (0,3) se reparte en
+proporción 2:1:1:1. Valor contrastado con el análisis de sensibilidad sobre los 75 casos de
+prueba: la exactitud es la misma (98,7 %) con umbrales de 0,30 a 0,50 y baja a 93,3 % con
+0,60. Se usa 0,40, dentro del rango estable. «Robustez al contexto»: cada caso, consultado
+con sus propios síntomas en todas las combinaciones posibles de dispositivo, SO y conexión,
+recupera primero su mismo diagnóstico.
+
+9.5 Verificación de la base
+---------------------------
+python motor_inferencia.py --verificar (duplicados y casos contradictorios, respaldos y
+fuentes [11]):
+  - [OK] Suma de pesos = 1.00
+  - [OK] Casos activos sin respaldo documental: ninguno
+  - [OK] Referencias a fuentes inexistentes (casos y reglas): ninguna
+  - [OK] Casos con síntomas fuera del catálogo o fuera de 1–3: ninguno
+  - [OK] Casos sin ningún síntoma de falla: ninguno
+  - [OK] Casos con síntomas que se excluyen entre sí: ninguno
+  - [OK] Casos con subcategoría inexistente: ninguno
+  - [OK] Casos pendientes de respaldo (no se usan para recomendar): ninguno
+  - [OK] 128 casos activos · 123 síntomas · 12 fuentes metodológicas · 82 fuentes técnicas
+
+============================================================================================
+10. INSTALACIÓN Y EJECUCIÓN
+============================================================================================
+
+
+Requisitos: Python 3.9 o superior (marcar «Add Python to PATH» al instalarlo) y la carpeta completa.
+
+Opción A – Windows: doble clic en ejecutar.bat (instala Streamlit la primera vez y abre el navegador).
+
+Opción B – terminal, dentro de la carpeta del proyecto:
+    pip install -r requirements.txt
+    streamlit run interfaz.py            (si falla: python -m streamlit run interfaz.py)
+Se abre http://localhost:8501. Para cerrar: Ctrl + C en la terminal.
+
+Motor por consola (sin interfaz, solo biblioteca estándar):
+    python motor_inferencia.py                 ejemplo + validación
+    python motor_inferencia.py --validar       validación dejando un caso fuera
+    python motor_inferencia.py --verificar     verificación de la base
+    python motor_inferencia.py --pruebas       casos de prueba
+    python motor_inferencia.py --auditar       auditoría de coherencia
+    python motor_inferencia.py --sensibilidad  análisis de sensibilidad
+
+============================================================================================
+11. MANTENIMIENTO DE LA BASE
+============================================================================================
+
+  - Agregar casos desde la interfaz (pestaña Administrar casos), no editando el JSON a mano,
+    para que se validen los datos y se rechacen duplicados.
+  - Registrar primero la fuente (pestaña Agregar fuente) y luego usarla como respaldo del
+    caso.
+  - Revisar los casos «Pendiente» retenidos desde tickets: agregarles su fuente o
+    eliminarlos.
+  - Ejecutar la verificación de la base después de cada cambio ([11]; [9] Sec. 5).
+  - Si edita un JSON a mano, conserve el formato (comillas dobles, comas) y guarde en UTF-8;
+    haga una copia antes.
+
+============================================================================================
+12. FUENTES
+============================================================================================
+
+12.1 Fuentes metodológicas (IEEE). [1]–[11] corresponden a los archivos «cita 1» … «cita
+11»; [12] se agregó en esta versión.
+
+[1] R. Mogrovejo Sánchez, “Diseño y desarrollo de una plataforma de help desk empleando la
+metodología de razonamiento basado en casos,” Tesis de pregrado, Esc. Prof. de Ingeniería de
+Sistemas, Univ. Católica de Santa María, Arequipa, Perú, 2017. Disponible:
+https://repositorio.ucsm.edu.pe/bitstreams/c4815cf1-f5bd-465b-be10-343e03d75356/download
+      Justifica: Revisión humana antes de retener (p. 9), derivar al especialista cuando el
+      sistema no resuelve (p. 60) y la diferencia incidente/problema (p. 224).
+
+[2] K. M. Ayasta Arellano, A. Camarena Salaverry y J. De La Flor Tito, “Propuesta de un
+sistema web de mesa de ayuda para la atención al usuario en el Hospital Nacional Guillermo
+Almenara Irigoyen 2021,” Tesis de pregrado, Fac. de Ciencias e Ingeniería, Univ. Peruana de
+Ciencias e Informática, Lima, Perú, 2022. Disponible:
+https://repositorio.upci.edu.pe/handle/upci/775
+      Justifica: Niveles de soporte: “unidades de primer, segundo y tercer nivel de soporte”
+      (p. 41).
+
+[3] L. S. Benitez Pereira, R. Pizzio y S. Bonho, “Comparison of information retrieval
+techniques applied to IT support tickets,” arXiv:2508.05654, jul. 2025. Disponible:
+https://arxiv.org/abs/2508.05654
+      Justifica: Similitud de Jaccard entre conjuntos de etiquetas de tickets (Ec. 2) y la
+      métrica de acierto en los primeros resultados.
+
+[4] E. E. Masquez Cubas, “Modelo de gestión de incidencias basado en marcos de trabajo y
+estándares para mejorar el servicio de TI en el sector salud de la región Lambayeque,” Tesis
+de maestría, Esc. de Posgrado, Univ. Católica Santo Toribio de Mogrovejo, Chiclayo, Perú,
+2023.
+      Justifica: Registro de síntomas en el ticket (p. 37), escalado funcional (p. 38),
+      cierre con conformidad (p. 49), tabla de categorías con código (p. 86), prioridad (p.
+      87), ficha del incidente (p. 96), tiempo de resolución como métrica (p. 98) y
+      recurrencia → problema (p. 184).
+
+[5] B. Betru y F. Getahun, “Ontology-driven intelligent IT incident management model,” Int.
+J. Inf. Technol. Comput. Sci., vol. 15, no. 1, pp. 30–41, feb. 2023, doi:
+10.5815/ijitcs.2023.01.04. Disponible: https://doi.org/10.5815/ijitcs.2023.01.04
+      Justifica: Vocabulario controlado del dominio de incidentes de TI (catálogo cerrado de
+      síntomas), p. 31.
+
+[6] M. Chen, R. Qu y W. Fang, “Case-based reasoning system for fault diagnosis of aero-
+engines,” Expert Syst. Appl., vol. 202, art. 117350, 2022, doi: 10.1016/j.eswa.2022.117350.
+Disponible: https://doi.org/10.1016/j.eswa.2022.117350
+      Justifica: Similitud local por tipo de atributo (Ec. 1 y Ec. 4, similitud por árbol),
+      similitud global como suma ponderada (Ec. 5), k vecinos y exactitud (Tabla 5).
+
+[7] S. Heras et al., “CBR model for the intelligent management of customer support centers,”
+en Intelligent Data Engineering and Automated Learning – IDEAL 2006, LNCS, vol. 4224,
+Berlín, Alemania: Springer, 2006, pp. 663–670, doi: 10.1007/11875581_80. Disponible:
+http://hdl.handle.net/10251/78887
+      Justifica: Árbol de tipificación (Sec. 3.1–3.2), grado de idoneidad de la solución
+      (Sec. 3.3) y retención con umbral de similitud hallado experimentalmente (Sec.
+      3.4–3.5).
+
+[8] A. Aamodt y E. Plaza, “Case-based reasoning: Foundational issues, methodological
+variations, and system approaches,” AI Commun., vol. 7, no. 1, pp. 39–59, 1994. Disponible:
+https://doi.org/10.3233/AIC-1994-7104
+      Justifica: Ciclo recuperar–reutilizar–revisar–retener; casos “suficientemente
+      similares… dado un umbral de similitud” (Sec. 5); copiar o adaptar la solución (Sec.
+      6); revisión en el entorno real (Sec. 7).
+
+[9] R. López de Mántaras et al., “Retrieval, reuse, revision and retention in case-based
+reasoning,” Knowl. Eng. Rev., vol. 20, no. 3, pp. 215–240, 2005, doi:
+10.1017/S0269888906000646. Disponible: https://doi.org/10.1017/S0269888906000646
+      Justifica: Recuperación k-NN (Sec. 3.1.1), recuperación orientada a la explicación
+      (Sec. 3.3.5), adaptación por sustitución (Sec. 4) y mantenimiento de la base (Sec. 5).
+
+[10] D. Wettschereck, D. W. Aha y T. Mohri, “A review and empirical evaluation of feature
+weighting methods for a class of lazy learning algorithms,” Artif. Intell. Rev., vol. 11,
+pp. 273–314, 1997, doi: 10.1023/A:1006593614256. Disponible:
+https://doi.org/10.1023/A:1006593614256
+      Justifica: Los pesos de los atributos pueden asignarse con conocimiento del dominio:
+      “using knowledge to assign feature weights” (Sec. 3.5).
+
+[11] B. Smyth y M. T. Keane, “Remembering to forget: A competence-preserving case deletion
+policy for case-based reasoning systems,” en Proc. 14th Int. Joint Conf. Artif. Intell.
+(IJCAI-95), Montreal, Canadá, 1995, pp. 377–383. Disponible:
+https://www.ijcai.org/Proceedings/95-1/Papers/050.pdf
+      Justifica: Mantenimiento de la base: evitar casos redundantes y conservar los que dan
+      cobertura (competencia).
+
+[12] P. Cichonski, T. Millar, T. Grance y K. Scarfone, “Computer security incident handling
+guide,” NIST, Gaithersburg, MD, EE. UU., SP 800-61 Rev. 2, 2012, doi:
+10.6028/NIST.SP.800-61r2. Disponible:
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf
+      Justifica: Priorización según impacto y puntos de escalamiento en la gestión de
+      incidentes (Sec. 2.3.1 y 3.2). Documento reemplazado por la Rev. 3 en 2025, pero
+      consultable.
+
+12.2 Fuentes técnicas T01–T82 (validan el contenido de los casos; consultadas el
+14/10/2026). Por organización: Microsoft 48, Dell 12, Epson 3, Brother 2, Canonical (Ubuntu)
+2, Cisco 2, Debian 2, Google 2, Proyecto systemd 2, CISA 1, GNOME 1, INCIBE 1, Lenovo 1,
+Mozilla 1, Red Hat 1, Logitech 1.
+
+T01  Brother, «Improve the Print Quality (HL-L2460DW Online User's Guide)», s. f.
+Disponible: https://support.brother.com/g/s/id/htmldoc/printer/cv_hll2460dw/use/html/GUID-
+EEC1EE16-C8ED-4BC3-B3C4-27B0AACF0D44_1.html
+      Usada en: TK-043
+
+T02  Brother, «Paper is Jammed in the Back of the Machine (HL-L6415DW Online User's Guide)»,
+s. f. Disponible:
+https://support.brother.com/g/s/id/htmldoc/printer/cv_hll6415dw/use/html/GUID-
+BA6FFC51-E9EA-4EFF-B9FA-7A438F9795A3_1.html
+      Usada en: TK-041
+
+T03  CISA, «#StopRansomware Guide», 2023. Disponible:
+https://www.cisa.gov/stopransomware/ransomware-guide
+      Usada en: TK-056
+
+T05  Canonical (Ubuntu), «nmcli(1) — Ubuntu jammy (network-manager 1.36.6-0ubuntu2)», 2022.
+Disponible: https://manpages.ubuntu.com/manpages/jammy/man1/nmcli.1.html
+      Usada en: R1
+
+T06  Canonical (Ubuntu), «Ubuntu Manpage: nm-settings-nmcli (Ubuntu 22.04 jammy)», s. f.
+Disponible: https://manpages.ubuntu.com/manpages/jammy/man5/nm-settings-nmcli.5.html
+      Usada en: TK-012
+
+T07  Cisco, «Troubleshoot Switch Port and Interface Problems», s. f. Disponible:
+https://www.cisco.com/c/en/us/support/docs/switches/catalyst-6500-series-
+switches/12027-53.html
+      Usada en: TK-003, TK-004, TK-005
+
+T08  Cisco, «Validate Wi-Fi Throughput Testing and Monitoring Guide», s. f. Disponible:
+https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-
+controllers/221766-validate-wi-fi-throughput-testing-and.html
+      Usada en: TK-013
+
+T09  Debian, «apt-get(8) — APT package handling utility (página de manual)», s. f.
+Disponible: https://manpages.debian.org/bookworm/apt/apt-get.8.en.html
+      Usada en: TK-054
+
+T10  Debian, «dhclient(8) — isc-dhcp-client (Debian bookworm)», s.f. Disponible:
+https://manpages.debian.org/bookworm/isc-dhcp-client/dhclient.8.en.html
+      Usada en: R1
+
+T11  Dell, «Computer Making Noises? Troubleshoot Loud Fans, Hard Drive & More», s. f.
+Disponible: https://www.dell.com/support/contents/en-us/article/product-support/self-
+support-knowledgebase/fix-common-issues/common-noises-from-computer
+      Usada en: TK-029, TK-030, TK-031
+
+T12  Dell, «Computer Won't Turn On: Troubleshoot Power Issues», s. f. Disponible:
+https://www.dell.com/support/contents/article/product-support/self-support-
+knowledgebase/fix-common-issues/no-power
+      Usada en: TK-020, TK-021, R3
+
+T13  Dell, «Cómo reemplazar o cambiar una batería CMOS en su computadora de escritorio
+Dell», s. f. Disponible: https://www.dell.com/support/kbdoc/es-es/000135183
+      Usada en: TK-017
+
+T14  Dell, «How to Fix a Black Screen or Display Issues on a Dell Laptop», s. f. Disponible:
+https://www.dell.com/support/kbdoc/en-us/000134946
+      Usada en: TK-026, TK-028
+
+T15  Dell, «How to Stop Computer and Laptop Overheating and Shut Down Issues», s. f.
+Disponible: https://www.dell.com/support/kbdoc/en-us/000130867
+      Usada en: TK-029, TK-030
+
+T16  Dell, «How to Test Your Dell Laptop Screen», s. f. Disponible:
+https://www.dell.com/support/kbdoc/en-us/000134936
+      Usada en: TK-026
+
+T17  Dell, «How to Troubleshoot AC Adapter Issues on a Dell Laptop», s. f. Disponible:
+https://www.dell.com/support/kbdoc/en-us/000125125/how-to-troubleshoot-ac-adapter-issues
+      Usada en: TK-037, R3
+
+T18  Dell, «How to Troubleshoot Dell Laptop Battery Issues», s. f. Disponible:
+https://www.dell.com/support/kbdoc/000123069
+      Usada en: TK-038
+
+T19  Dell, «How to Troubleshoot Power Issues on a Dell Desktop or All in One (KB
+000125186)», s.f. Disponible: https://www.dell.com/support/kbdoc/000125186
+      Usada en: R3
+
+T20  Dell, «Resolve No Power, No POST, No Boot or No Video Issues», s. f. Disponible:
+https://www.dell.com/support/kbdoc/ar-qa/000125609/resolve-no-power-no-post-no-boot-or-no-
+video-issues-with-your-dell-computer
+      Usada en: TK-022, TK-023
+
+T21  Dell, «Troubleshooting Video Issues With a Graphics Card Fitted in a Dell Desktop», s.
+f. Disponible: https://www.dell.com/support/kbdoc/en-us/000175323
+      Usada en: TK-023
+
+T22  Dell, «Understanding Beep Codes on a Dell Desktops», s. f. Disponible:
+https://www.dell.com/support/kbdoc/en-us/000124349/
+      Usada en: TK-022
+
+T23  Epson, «I see the message No Signal. What should I do? (Epson LS500)», s. f.
+Disponible: https://epson.com/faq/SPT_V11H956620~faq-00003f7-ls500w_ls500b
+      Usada en: TK-024, TK-025
+
+T24  Epson, «IP Address Assignment (User's Guide AM-C10000 Series)», s. f. Disponible: https
+://download4.epson.biz/sec_pubs/am-c10000_series/useg/en/GUID-2C32CD08-3567-4C82-A683-
+B4BB1141BE8F.htm
+      Usada en: TK-040
+
+T25  Epson, «Setting Up Standard TCP/IP Ports - Windows», s. f. Disponible:
+https://download4.epson.biz/sec_pubs/tips/Tips_Printer_1/en/GUID-
+EAF6D5BF-17DD-4CA7-A0AA-E9B9DD086AB3.htm
+      Usada en: TK-040, TK-042
+
+T26  GNOME, «Connect to a wireless network (GNOME Help, escritorio usado por Ubuntu)», s. f.
+Disponible: https://help.gnome.org/gnome-help/net-wireless-connect.html
+      Usada en: TK-011, TK-012
+
+T27  Google, «Eliminar anuncios no deseados, ventanas emergentes y malware (Ayuda de Google
+Chrome)», s. f. Disponible: https://support.google.com/chrome/answer/2765944?hl=es
+      Usada en: TK-045
+
+T28  Google, «Solucionar errores de conexión y de carga en Chrome», s. f. Disponible:
+https://support.google.com/chrome/answer/6098869?hl=es
+      Usada en: TK-014, TK-016
+
+T29  INCIBE, «Ayuda ransomware (Servicio antiransomware)», s. f. Disponible:
+https://www.incibe.es/empresas/te-ayudamos/servicio-antiransomware
+      Usada en: TK-056
+
+T30  Lenovo, «Interactuar con el equipo (Guía del usuario Yoga Slim 7 Pro 14")», s. f.
+Disponible:
+https://download.lenovo.com/pccbbs/pubs/yoga_slim7_14/html/html_es/moreinfo_interact.html
+      Usada en: TK-009
+
+T31  Microsoft, «Account lockout threshold - Windows 10», s. f. Disponible:
+https://learn.microsoft.com/en-us/previous-versions/windows/it-
+pro/windows-10/security/threat-protection/security-policy-settings/account-lockout-threshold
+      Usada en: TK-057
+
+T32  Microsoft, «Administración de los métodos de autenticación para la autenticación
+multifactor de Microsoft Entra», s. f. Disponible: https://learn.microsoft.com/es-
+es/entra/identity/authentication/howto-mfa-userdevicesettings
+      Usada en: TK-060
+
+T33  Microsoft, «Administrador de credenciales en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/security/credential-manager-in-windows
+      Usada en: TK-019
+
+T34  Microsoft, «Administrar permisos de aplicación para una cámara en Windows», s. f.
+Disponible: https://support.microsoft.com/es-es/windows/privacy/manage-app-permissions-for-
+a-camera-in-windows
+      Usada en: TK-036
+
+T35  Microsoft, «Agregar o instalar una impresora en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/add-or-install-a-printer-in-windows-
+cc0724cf-793e-3542-d1ff-727e4978638b
+      Usada en: TK-042
+
+T36  Microsoft, «Análisis detallado del autoservicio de restablecimiento de contraseña -
+Microsoft Entra ID», s. f. Disponible: https://learn.microsoft.com/es-
+es/entra/identity/authentication/concept-sspr-howitworks
+      Usada en: TK-057, TK-058
+
+T37  Microsoft, «Bloquear aplicaciones potencialmente no deseadas con Antivirus de Microsoft
+Defender», s. f. Disponible: https://learn.microsoft.com/es-es/defender-endpoint/detect-
+block-potentially-unwanted-apps-microsoft-defender-antivirus
+      Usada en: TK-045
+
+T38  Microsoft, «Cambiar a configuración de audio (Microsoft Teams)», s. f. Disponible:
+https://support.microsoft.com/es-es/office/change-audio-
+settings-7a35433c-02df-4809-8f98-9a4da8a63c82
+      Usada en: TK-052
+
+T39  Microsoft, «Cambiar la configuración de TCP/IP», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/cambiar-la-configuraci%C3%B3n-de-tcp-ip-
+bd0a07af-15f5-cd6a-363f-ca2b6f391ace
+      Usada en: TK-001, TK-006
+
+T40  Microsoft, «Cambiar la contraseña de la cuenta profesional o educativa», s. f.
+Disponible: https://support.microsoft.com/es-ES/accounts-billing/work-school/change-your-
+work-or-school-account-password
+      Usada en: TK-059
+
+T41  Microsoft, «Configurar las aplicaciones de inicio en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/experience/startup-boot/configure-startup-
+applications-in-windows
+      Usada en: TK-044
+
+T42  Microsoft, «Corregir errores del servicio de cola de impresión que no se ejecuta en
+Windows», s. f. Disponible: https://support.microsoft.com/es-es/windows/fix-printer-spooler-
+errors-in-windows-bb0de80a-8c4a-4938-a36a-f89a859113f0
+      Usada en: TK-039
+
+T43  Microsoft, «Corregir la conexión de correo electrónico de Outlook mediante la
+reparación del perfil», s. f. Disponible: https://support.microsoft.com/es-es/outlook/fix-
+your-outlook-email-connection-by-repairing-your-profile
+      Usada en: TK-051
+
+T44  Microsoft, «Corregir los falsos positivos y negativos en Microsoft Defender para punto
+de conexión», s. f. Disponible: https://learn.microsoft.com/es-es/defender-
+endpoint/defender-endpoint-false-positives-negatives
+      Usada en: TK-055
+
+T45  Microsoft, «Creación de reflejo de pantalla y proyección en su PC o inalámbrica», s. f.
+Disponible: https://support.microsoft.com/es-es/help/27911
+      Usada en: TK-024
+
+T46  Microsoft, «Cómo desinstalar una actualización de Windows Update», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/how-to-uninstall-a-windows-
+update-c77b8f9b-e4dc-4e9f-a803-fdec12e59fb0
+      Usada en: TK-047
+
+T47  Microsoft, «Cómo funciona el Control de cuentas de usuario», s. f. Disponible:
+https://learn.microsoft.com/es-es/windows/security/application-security/application-
+control/user-account-control/how-it-works
+      Usada en: TK-053
+
+T48  Microsoft, «Determining Lease Duration (DHCP, Windows Server 2003)», s. f. Disponible:
+https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-
+server-2003/cc783573(v=ws.10)
+      Usada en: TK-008
+
+T49  Microsoft, «DHCP troubleshooting guidance», 2026. Disponible:
+https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/troubleshoot-dhcp-
+guidance
+      Usada en: TK-003, TK-006, TK-007, TK-008
+
+T50  Microsoft, «Error 0x8004010F when sending or receiving email - Outlook», s. f.
+Disponible: https://learn.microsoft.com/en-
+US/outlook/troubleshoot/synchronization/error-0x8004010f-when-sending-or-receiving-emails
+      Usada en: TK-051
+
+T51  Microsoft, «Errores de activación y de producto sin licencia en Office», s. f.
+Disponible: https://support.microsoft.com/es-ES/Microsoft-365-Activation-Licensing/office-
+install/unlicensed-product-and-activation-errors-in-office
+      Usada en: TK-049
+
+T52  Microsoft, «Establecer la configuración de hora, fecha y zona horaria en Windows», s.
+f. Disponible: https://support.microsoft.com/es-es/windows/experience/personalization/set-
+time-date-and-time-zone-settings-in-windows
+      Usada en: TK-017, TK-018
+
+T53  Microsoft, «Event ID 4199 — TCP/IP Network Interface Configuration», s. f. Disponible:
+https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-
+server-2008-R2-and-2008/dd379922(v=ws.10)
+      Usada en: TK-006
+
+T54  Microsoft, «Fix Ethernet connection problems in Windows», s.f. Disponible:
+https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-
+connection-problems-in-windows
+      Usada en: R2
+
+T55  Microsoft, «How to reset your Internet Explorer proxy settings», 2020. Disponible:
+https://learn.microsoft.com/en-us/previous-versions/troubleshoot/browsers/connectivity-
+navigation/how-to-reset-proxy-settings
+      Usada en: TK-015
+
+T56  Microsoft, «How to use automatic TCP/IP addressing without a DHCP server», s. f.
+Disponible: https://learn.microsoft.com/en-us/windows-server/troubleshoot/how-to-use-
+automatic-tcpip-addressing-without-a-dh
+      Usada en: TK-007
+
+T57  Microsoft, «ipconfig (Comandos de Windows)», s. f. Disponible:
+https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/ipconfig
+      Usada en: TK-001, TK-002, R1
+
+T58  Microsoft, «Liberar espacio en unidades de disco en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/free-up-drive-space-in-
+windows-85529ccb-c365-490d-b548-831022bc9b32
+      Usada en: TK-032
+
+T59  Microsoft, «Maximum password age - Windows 10», s. f. Disponible:
+https://learn.microsoft.com/en-us/previous-versions/windows/it-
+pro/windows-10/security/threat-protection/security-policy-settings/maximum-password-age
+      Usada en: TK-059
+
+T60  Microsoft, «Mensaje de error "No podemos iniciar sesión en su cuenta"», s. f.
+Disponible: https://support.microsoft.com/es-es/windows/security/identity-signin/we-can-t-
+sign-in-to-your-account-error-message
+      Usada en: TK-048
+
+T61  Microsoft, «Net use (Windows Server 2012 R2 y 2012)», s. f. Disponible:
+https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-
+server-2012-r2-and-2012/gg651155(v=ws.11)
+      Usada en: TK-019
+
+T62  Microsoft, «Opciones de la línea de comandos de Powercfg», s. f. Disponible:
+https://learn.microsoft.com/es-es/windows-hardware/design/device-experiences/powercfg-
+command-line-options
+      Usada en: TK-038
+
+T63  Microsoft, «Problemas con el mouse y el teclado en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/help/17417
+      Usada en: TK-033, TK-034, TK-061, TK-062, TK-064
+
+T64  Microsoft, «Protección contra amenazas y virus en la aplicación Seguridad de Windows»,
+s. f. Disponible: https://support.microsoft.com/es-es/windows/security/threat-malware-
+protection/virus-and-threat-protection-in-the-windows-security-app
+      Usada en: TK-045, TK-055
+
+T65  Microsoft, «Registrar el método de verificación de restablecimiento de contraseña para
+una cuenta profesional o educativa», s. f. Disponible: https://support.microsoft.com/es-
+ES/accounts-billing/work-school/register-the-password-reset-verification-method-for-a-work-
+or-school-account
+      Usada en: TK-058
+
+T66  Microsoft, «Reparar un libro dañado», s. f. Disponible:
+https://support.microsoft.com/es-es/excel/repair-a-corrupted-workbook
+      Usada en: TK-050
+
+T67  Microsoft, «Reparar un perfil de usuario dañado», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/security/identity-signin/fix-a-corrupted-user-
+profile
+      Usada en: TK-048
+
+T68  Microsoft, «Resolución avanzada de problemas para errores de código de parada», s. f.
+Disponible: https://learn.microsoft.com/es-es/troubleshoot/windows-client/performance/stop-
+error-or-blue-screen-error-troubleshooting
+      Usada en: TK-027, TK-028
+
+T69  Microsoft, «Run Diagnostics to Check Your System for Memory Problems (TechNet
+Magazine)», s. f. Disponible: https://learn.microsoft.com/en-us/previous-versions/technet-
+magazine/ff700221(v=msdn.10)
+      Usada en: TK-027
+
+T70  Microsoft, «Security guidelines for system services in Windows Server 2016», s.f.
+Disponible: https://learn.microsoft.com/en-us/windows-server/security/windows-
+services/security-guidelines-for-disabling-system-services-in-windows-server
+      Usada en: R1
+
+T71  Microsoft, «Set-DhcpServerv4Scope (DhcpServer)», s. f. Disponible:
+https://learn.microsoft.com/en-us/powershell/module/dhcpserver/set-dhcpserverv4scope
+      Usada en: TK-008
+
+T72  Microsoft, «Solucionar problemas de conexión Wi-Fi en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/solucionar-problemas-de-conexi%C3%B3n-wi-fi-en-
+windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c
+      Usada en: TK-007, TK-009, TK-010, TK-011, TK-013, R1, R2
+
+T73  Microsoft, «Solucionar problemas de sonido o audio en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/help/4026994
+      Usada en: TK-035, TK-064
+
+T74  Microsoft, «Solucionar problemas del micrófono», s. f. Disponible:
+https://support.microsoft.com/es-ES/Windows/Hardware/Drivers/fix-microphone-problems
+      Usada en: TK-052
+
+T75  Microsoft, «Solución de problemas de clientes DNS», s. f. Disponible:
+https://learn.microsoft.com/es-es/windows-server/networking/dns/troubleshoot/troubleshoot-
+dns-client
+      Usada en: TK-001, TK-002
+
+T76  Microsoft, «Tips to improve PC performance in Windows», s. f. Disponible:
+https://support.microsoft.com/en-us/windows/tips-to-improve-pc-performance-in-
+windows-b3b3ef5b-5953-fb6a-2528-4bbed82fba96
+      Usada en: TK-044, TK-046
+
+T77  Microsoft, «Usar un servidor proxy en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/usar-un-servidor-proxy-en-
+windows-03096c53-0554-4ffe-b6ab-8b1deee8dae1
+      Usada en: TK-015
+
+T78  Mozilla, «Cómo solucionar problemas de error de fecha y hora en páginas seguras», s. f.
+Disponible: https://support.mozilla.org/es/kb/como-solucionar-problemas-de-error-de-fecha-y-
+hora-paginas-seguras
+      Usada en: TK-017, TK-018
+
+T79  Proyecto systemd, «resolvectl(1) — Linux manual page (systemd)», 2026. Disponible:
+https://man7.org/linux/man-pages/man1/resolvectl.1.html
+      Usada en: R1
+
+T80  Proyecto systemd, «systemd-resolved.service(8) — Linux manual page», 2026. Disponible:
+https://man7.org/linux/man-pages/man8/systemd-resolved.service.8.html
+      Usada en: R1
+
+T81  Red Hat, «Chapter 9. Managing wifi connections (Configuring and managing networking,
+RHEL 10)», s. f. Disponible: https://docs.redhat.com/en/documentation/red_hat_enterprise_lin
+ux/10/html/configuring_and_managing_networking/managing-wifi-connections
+      Usada en: TK-012
+
+T82  Microsoft, «Bluetooth se sigue desconectando en Windows», s. f. Disponible:
+https://support.microsoft.com/es-es/windows/hardware/bluetooth/bluetooth-keeps-
+disconnecting-in-windows
+      Usada en: TK-063
+
+T83  Logitech, «Logitech device stops responding in Windows», s. f. Disponible:
+https://support.logi.com/hc/en-ca/articles/360023347833
+      Usada en: TK-061
+
+============================================================================================
+13. HISTORIAL DE CAMBIOS
+============================================================================================
+
+  - v1.0: base en Excel con 60 casos simulados «pendientes de validar con experto»; interfaz
+    de 4 pestañas.
+  - v2.0: base en JSON; cada caso con respaldo documental verificado; 17 fuentes
+    metodológicas y 82 técnicas; reglas R1–R5 con fuentes (R5 ya no queda sin autor); casos
+    pendientes excluidos de la recuperación; clave de administrador para agregar o retener
+    casos; pestañas Inicio, Manual de uso, Administrar casos y Fuentes y justificación;
+    verificación de la base y análisis de sensibilidad; memoria descriptiva.
+  - v2.1: revisión de coherencia. Búsqueda por subcategoría y solo con casos que comparten
+    síntomas de falla; el sistema pregunta cuando faltan datos; detecta fallas mezcladas,
+    síntomas excluyentes y soluciones de otro sistema operativo; peso de síntomas 0,6; 4
+    casos nuevos de periféricos; auditoría de coherencia (0 problemas).
+  - v2.2: conexión y dispositivo en los que aplica cada solución; validación de tickets
+    contradictorios (subcategoría Wi-Fi con conexión cableada, batería en PC); la interfaz
+    fija la conexión o el dispositivo según la subcategoría y oculta síntomas imposibles;
+    auditoría ampliada a 8 equipos.
+  - v2.3: revisión final contra la ficha P9, los requisitos comunes y la rúbrica. Un ticket
+    repetido por falla (128 tickets, 64 fallas) y validación dejando un caso fuera por
+    diagnóstico; 75 casos de prueba con respuesta esperada; inferencia de síntomas generales
+    ([8] Sec. 5); nunca se propone una solución que deje un síntoma sin explicar; las
+    preguntas de contexto solo se hacen si distinguen entre causas; peso de síntomas 0,7
+    elegido con el análisis de sensibilidad; fuentes metodológicas reducidas a [1]–[12].
+
+============================================================================================
+14. CORRESPONDENCIA CON LA FICHA P9, LOS REQUISITOS COMUNES Y LA RÚBRICA
+============================================================================================
+
+  - Problema y objetivo (recuperar tickets anteriores similares y sugerir la solución que
+    funcionó): pestaña Nuevo ticket; MotorInferencia.resolver().
+  - Representación (caso: dispositivo, sistema operativo, síntomas, causa, solución aplicada
+    y tiempo de resolución; similitud por coincidencia de síntomas y dispositivo):
+    casos.json y estructura_caso.json; similitud ponderada con Jaccard para síntomas y
+    coincidencia exacta para dispositivo (sección 6.1).
+  - Ejemplo ilustrativo (laptop sin internet con luz de enlace encendida → revisar IP y
+    DNS): caso de prueba CP-01 y ejemplo por consola; el sistema propone configurar el DNS
+    automático (DHCP) y vaciar la caché DNS (TK-001/TK-002).
+  - Entradas y salidas (dispositivo y síntomas → 3 tickets similares con su solución):
+    formulario del ticket y sección «Casos más similares» (k = 3) con causa, solución y
+    respaldo de cada ticket.
+  - Validación dejando un caso fuera con al menos 40 tickets; exactitud y acierto en los 3
+    primeros: 128 tickets, top-1 85.2%, top-3 100.0% (sección 9.1).
+  - Mínimo 40 tickets y retención de tickets nuevos: 128 tickets; retención con clave,
+    umbral 0,90 y estado «Pendiente» hasta tener respaldo (sección 6.5).
+  - Requisito común «fuente de cada caso»: cada caso tiene su respaldo con fragmento literal
+    (sección 5.3); cada regla y parámetro, su fuente (pestaña Fuentes, matriz de
+    trazabilidad).
+  - Requisito común «prototipo con interfaz y explicación de cada resultado»: interfaz web
+    con «¿Por qué se sugiere?», «Justificación de la decisión» y respaldo documental.
+  - Requisito común «al menos 50 casos de prueba y métricas»: 75 casos de prueba con
+    exactitud, acierto en los 3 primeros y similitud media (sección 9.2).
+  - Requisito común «tratamiento ético»: no se guardan datos personales; avisos de que el
+    sistema orienta y no reemplaza al técnico (sección 2).
+  - Estructura del informe 3.5 «criterio de desempate»: similitud_y_parametros.json →
+    desempates (sección 6.1).
+  - Estructura del informe 4.3 «duplicados y casos contradictorios»: verificar_base()
+    (sección 9.5).
+  - Rúbrica «Desarrollo del software»: los cuatro pasos del ciclo, la administración, la
+    validación y la explicación están implementados y se ejecutan sin errores (pruebas
+    automáticas de la interfaz y del motor).
+

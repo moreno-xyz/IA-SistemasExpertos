@@ -1,0 +1,154 @@
+{
+  "descripcion": "Medida de similitud y parámetros del motor. Los MÉTODOS provienen de las fuentes; los VALORES numéricos son decisiones de diseño del equipo, contrastadas con el análisis de sensibilidad del motor (pestaña Validación), tal como Heras et al. [7] fijan su umbral «experimentalmente».",
+  "formula_global": "Sim(nuevo, caso) = Σ wj · simj(nuevo, caso), con Σ wj = 1",
+  "fuente_formula": "[6] Ec. 5: la similitud global es la suma ponderada de las similitudes locales",
+  "atributos": [
+    {
+      "atributo": "sintomas",
+      "nombre": "Síntomas",
+      "similitud_local": "Índice de Jaccard |A∩B| / |A∪B| sobre los códigos del catálogo",
+      "peso": 0.7,
+      "fuente_metodo": "[3] Ec. 2",
+      "justificacion_valor": "Los síntomas distinguen la causa ([4] p. 37 y p. 49). Se eligió 0,7 con el análisis de sensibilidad (pestaña Validación): es el menor valor con el mayor acierto del diagnóstico en la validación dejando un caso fuera (85,2 % frente a 82,0 % con 0,6 y 79,7 % con 0,5; con 0,8 no mejora) y mantiene 100 % de robustez al contexto. El resto (0,3) se reparte en proporción 2:1:1:1."
+    },
+    {
+      "atributo": "subcategoria",
+      "nombre": "Subcategoría",
+      "similitud_local": "Árbol: 1 misma subcategoría; 0,5 misma categoría padre; 0 en otro caso",
+      "peso": 0.12,
+      "fuente_metodo": "[6] Ec. 4 (similitud por árbol); [7] Sec. 3.1–3.2 (árbol de tipificación)",
+      "justificacion_valor": "Ubica la falla en la taxonomía; segundo en importancia. Recibe parte del 0,3 restante en proporción 2:1:1:1."
+    },
+    {
+      "atributo": "dispositivo",
+      "nombre": "Dispositivo",
+      "similitud_local": "Coincidencia exacta (1 / 0)",
+      "peso": 0.06,
+      "fuente_metodo": "[6] Ec. 1",
+      "justificacion_valor": "Solo afina el orden; las diferencias se corrigen con la regla R3. Recibe parte del 0,3 restante en proporción 2:1:1:1."
+    },
+    {
+      "atributo": "so",
+      "nombre": "Sistema operativo",
+      "similitud_local": "1 igual; 0,5 misma familia (Windows 10 / 11); 0 distinto",
+      "peso": 0.06,
+      "fuente_metodo": "[6] Ec. 1 y Ec. 4",
+      "justificacion_valor": "Solo afina el orden; las diferencias se corrigen con la regla R1. Recibe parte del 0,3 restante en proporción 2:1:1:1."
+    },
+    {
+      "atributo": "conexion",
+      "nombre": "Conexión",
+      "similitud_local": "Coincidencia exacta (1 / 0)",
+      "peso": 0.06,
+      "fuente_metodo": "[6] Ec. 1",
+      "justificacion_valor": "Solo afina el orden; las diferencias se corrigen con la regla R2. Recibe parte del 0,3 restante en proporción 2:1:1:1."
+    }
+  ],
+  "fuente_pesos": "Los pesos pueden asignarse con conocimiento del dominio: [10] Sec. 3.5 («using knowledge to assign feature weights»); [9] Sec. 3.1.1.",
+  "parametros": {
+    "k": {
+      "valor": 3,
+      "uso": "Se muestran los 3 casos más similares (recuperación k-NN).",
+      "fuente": "[9] Sec. 3.1.1 (k nearest neighbor); [6] Tabla 5 prueba distintos k",
+      "justificacion_valor": "Decisión de diseño: con k = 3 el técnico ve alternativas sin saturarse; [3] también evalúa acierto en los primeros resultados."
+    },
+    "umbral_minimo": {
+      "valor": 0.4,
+      "uso": "Si el mejor caso no llega a este valor, o no comparte ningún síntoma, no se propone solución y se escala.",
+      "fuente": "[8] Sec. 5 («sufficiently similar… given a similarity threshold»); escalar: [4] p. 38, [1] p. 60",
+      "justificacion_valor": "Valor contrastado con el análisis de sensibilidad sobre los 75 casos de prueba: la exactitud es la misma (98,7 %) con umbrales de 0,30 a 0,50 y baja a 93,3 % con 0,60. Se usa 0,40, dentro del rango estable."
+    },
+    "umbral_retencion": {
+      "valor": 0.9,
+      "uso": "Al retener: si hay un caso con similitud ≥ umbral y la misma solución, se refuerza (veces aplicada con éxito + 1); si no, se crea un caso nuevo.",
+      "fuente": "[7] Sec. 3.4–3.5 («If there is not a similar enough case… a new case… is created»); [11]",
+      "justificacion_valor": "[7] fija este umbral experimentalmente; el equipo usa 0,90 para evitar duplicados."
+    },
+    "desempates": [
+      {
+        "orden": 1,
+        "criterio": "Más veces aplicada con éxito (idoneidad)",
+        "fuente": "[7] Sec. 3.3"
+      },
+      {
+        "orden": 2,
+        "criterio": "Resuelto en 1.er nivel antes que en 2.º",
+        "fuente": "[4] p. 38; [2] p. 41"
+      },
+      {
+        "orden": 3,
+        "criterio": "Menor tiempo de resolución",
+        "fuente": "[4] p. 98 (tiempo promedio de resolución como métrica)"
+      },
+      {
+        "orden": 4,
+        "criterio": "Caso más reciente",
+        "fuente": "Decisión de diseño ([8] Sec. 5, tarea Select)"
+      }
+    ],
+    "condicion_retener": {
+      "valor": "Técnico confirma + usuario conforme + clave de administrador",
+      "fuente": "[4] p. 49 (cierre con conformidad); [1] p. 9 (se retiene la solución confirmada o validada); [8] Sec. 7"
+    },
+    "solo_casos_validados": {
+      "valor": true,
+      "uso": "Solo los casos con estado «Validado» o «Validado parcialmente» participan en la recuperación; los «Pendiente» esperan su respaldo documental.",
+      "fuente": "[1] p. 9; [8] Sec. 7"
+    },
+    "mantenimiento": {
+      "valor": "Ejecutar la verificación de la base cada vez que se agregan casos",
+      "fuente": "[11]; [9] Sec. 5"
+    },
+    "busqueda_por_niveles": {
+      "valor": "Subcategoría → categoría → toda la base, solo casos que explican al menos un síntoma de falla registrado en el ticket",
+      "uso": "Primero se buscan casos de la MISMA subcategoría que expliquen algún síntoma de falla que el técnico marcó; solo si no hay, se sube a la categoría y luego a toda la base. Un caso que solo coincide en un síntoma general inferido, o en ninguno, no se muestra.",
+      "fuente": "[7] Sec. 3.2 (árbol de tipificación: se busca en la categoría y, si no hay casos, en la más general); [8] Sec. 5 (Initially match: los casos se recuperan por descriptores relevantes compartidos)"
+    },
+    "umbral_sintomas_otra_subcategoria": {
+      "valor": 0.5,
+      "uso": "Si el caso más parecido es de otra subcategoría, solo se propone su solución cuando comparte al menos la mitad de los síntomas (Jaccard ≥ 0,5); si no, se pide revisar los síntomas o escalar.",
+      "fuente": "[7] Sec. 3.2; [8] Sec. 5 (umbral de similitud); [3] Ec. 2 (Jaccard)",
+      "justificacion_valor": "Decisión de diseño: evita proponer la solución de otra falla cuando solo coincide un síntoma (p. ej. un periférico que se desconecta frente a una PC que se apaga por calor)."
+    },
+    "sintomas_de_contexto": {
+      "valor": "Los síntomas de tipo «contexto» (p. ej. «Impresora encendida», «Otros usuarios sí acceden») afinan la búsqueda, pero por sí solos no recuperan casos: se exige compartir al menos un síntoma de FALLA.",
+      "fuente": "[8] Sec. 5 (Identify features / Initially match: recuperar por descriptores relevantes); [5] (vocabulario controlado)"
+    },
+    "cobertura_minima": {
+      "valor": 0.5,
+      "uso": "Para proponer la solución, el ticket debe confirmar al menos la mitad de los síntomas del caso recuperado. Si no, o si otra falla distinta queda casi empatada, el sistema no adivina: muestra las causas posibles y pregunta por los síntomas que las distinguen.",
+      "fuente": "[8] Sec. 5, p. 16 (Select: «asking the user for confirmation and additional information»); [9] Sec. 3.3.5 (RBC conversacional: explicar por qué se hace una pregunta); [7] p. 5 (preguntas que el operador hace al cliente)",
+      "justificacion_valor": "Decisión de diseño: con un solo síntoma genérico (p. ej. «Sin acceso a internet») hay varias causas posibles; se pide un dato más en vez de elegir una por desempate."
+    },
+    "margen_empate": {
+      "valor": "Empate por síntomas",
+      "uso": "Si otro caso con OTRA causa coincide igual o mejor en los síntomas, el dispositivo, el SO o la conexión no deciden la causa: se pregunta por los síntomas que los distinguen. Si los dos casos tienen exactamente los mismos síntomas, se propone el más parecido y el otro queda como alternativa.",
+      "fuente": "[8] Sec. 5, p. 16 (Select); [9] Sec. 3.3.5 (RBC conversacional)",
+      "justificacion_valor": "Decisión de diseño tras la auditoría de coherencia: evita elegir la causa por el tipo de equipo cuando los síntomas no la distinguen."
+    },
+    "so_aplicable": {
+      "valor": "Cada caso indica en qué sistema operativo aplica su solución (Windows, Ubuntu o ambos).",
+      "uso": "Solo se recuperan casos cuya solución aplica al sistema operativo del ticket. Las que usan ipconfig se traducen a Ubuntu con R1; las propias de un sistema (Win+P, Administrador de tareas, apt, etc.) no se proponen en el otro.",
+      "fuente": "[9] Sec. 4 (la adaptación solo es posible si existe el conocimiento para sustituir la parte de la solución); [8] Sec. 6"
+    },
+    "contexto_no_confirmado": {
+      "valor": "Si el caso supone un dato de un grupo excluyente que el ticket no indicó (p. ej. «Periférico inalámbrico con receptor USB»), se pregunta antes de proponer SOLO si otro candidato con otra causa supone el otro valor del grupo (la respuesta distingue entre causas). Si ningún candidato lo distingue, se propone y se avisa: «El caso supone X: confírmelo antes de aplicar la solución».",
+      "fuente": "[8] Sec. 5, p. 16 («asking the user for confirmation and additional information»); [9] Sec. 3.3.5 (RBC conversacional: preguntar lo que distingue entre candidatos)"
+    },
+    "conexion_y_dispositivo_aplicable": {
+      "valor": "Cada caso indica con qué conexión (cableada, Wi-Fi) y dispositivo (PC, laptop) tiene sentido su solución; algunas subcategorías y síntomas también lo exigen (p. ej. «Wi-Fi», «Luz de enlace apagada», «Batería no carga»).",
+      "uso": "Si el ticket se contradice (p. ej. subcategoría Wi-Fi con conexión cableada) se avisa antes de buscar; y no se recuperan casos cuya solución no tiene sentido para la conexión o el dispositivo del ticket (p. ej. «acercarse al punto de acceso» en una PC cableada). Las diferencias que sí tienen equivalente se adaptan con R2 y R3.",
+      "fuente": "[9] Sec. 4 (solo se adapta lo que tiene conocimiento de sustitución); [8] Sec. 5 (Identify features: descartar descriptores incoherentes)"
+    },
+    "inferencia_sintomas": {
+      "valor": "Cierre transitivo de «implica» (catalogo_sintomas.json)",
+      "uso": "Antes de comparar, el ticket y cada caso se completan con los síntomas generales que se deducen de los específicos (p. ej. «IP 169.254.x.x» → «Sin acceso a internet» → «Páginas no cargan»). Se usan en la similitud y para decidir qué síntomas explica un caso, pero un caso solo se recupera si explica al menos un síntoma que el técnico marcó.",
+      "fuente": "[8] Sec. 5 (Identify Features: «to infer other relevant problem features»)"
+    },
+    "fallas_mezcladas": {
+      "valor": "Si un síntoma de falla del ticket no lo explica el mejor caso y sí otro caso con otra causa, no se elige una sola causa.",
+      "uso": "El sistema indica qué síntoma corresponde a cada caso y que pueden ser dos fallas distintas (un ticket por cada una) o una falla que la base aún no tiene (escalar).",
+      "fuente": "[8] Sec. 5 (Select); [4] p. 38 (escalar)"
+    }
+  }
+}

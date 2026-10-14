@@ -1,0 +1,2050 @@
+{
+  "descripcion": "Casos de prueba simulados para la validación (no están en la base de casos). La respuesta esperada la definió el equipo antes de ejecutar el sistema, a partir de la fuente técnica de la falla esperada (no hay experto). Tipos: típico (falla conocida con síntomas parciales y otro equipo), difícil (síntoma general, causas parecidas o adaptación a otro sistema operativo) y límite (ticket contradictorio, fuera de alcance o sin síntoma de falla).",
+  "acciones": {
+    "proponer": "el sistema propone una solución y su causa es una de las esperadas",
+    "preguntar": "el sistema no propone; pide más datos y entre sus 3 casos está una causa esperada",
+    "no proponer": "el sistema no propone solución (avisa la contradicción, la mezcla de fallas o escala)"
+  },
+  "casos": [
+    {
+      "id": "CP-01",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.1",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S001",
+          "S002"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-001",
+          "TK-002"
+        ],
+        "causas": [
+          "La caché DNS conserva respuestas incorrectas o desactualizadas (por ejemplo, tras un cambio de servidor)",
+          "Servidor DNS configurado manualmente con una dirección que ya no existe"
+        ]
+      },
+      "justificacion": "Ejemplo de la ficha P9: sin internet con luz de enlace encendida apunta a DNS / configuración IP.",
+      "fuente_respuesta": [
+        "T75 (TK-001)",
+        "T75 (TK-002)"
+      ]
+    },
+    {
+      "id": "CP-02",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S004",
+          "S005"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-003",
+          "TK-004"
+        ],
+        "causas": [
+          "Cable de red desconectado del punto de red",
+          "Conector RJ45 del cable dañado"
+        ]
+      },
+      "justificacion": "Luz de enlace apagada e ícono con X: falla física del cable o conector.",
+      "fuente_respuesta": [
+        "T07 (TK-003)",
+        "T07 (TK-004)"
+      ]
+    },
+    {
+      "id": "CP-03",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S004",
+          "S006"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-005"
+        ],
+        "causas": [
+          "Puerto del switch desactivado o dañado"
+        ]
+      },
+      "justificacion": "Si otro equipo tampoco conecta en ese punto, la falla está en el puerto del switch.",
+      "fuente_respuesta": [
+        "T07 (TK-005)"
+      ]
+    },
+    {
+      "id": "CP-04",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.2",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S007",
+          "S008"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-006"
+        ],
+        "causas": [
+          "IP fija duplicada con otro equipo"
+        ]
+      },
+      "justificacion": "Mensaje de conflicto de IP: IP duplicada.",
+      "fuente_respuesta": [
+        "T53 (TK-006)"
+      ]
+    },
+    {
+      "id": "CP-05",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S010",
+          "S012"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-008"
+        ],
+        "causas": [
+          "Pool de direcciones DHCP agotado en la VLAN de aulas"
+        ]
+      },
+      "justificacion": "169.254.x.x en varios usuarios: ámbito DHCP agotado (problema, se escala).",
+      "fuente_respuesta": [
+        "T49 (TK-008)"
+      ]
+    },
+    {
+      "id": "CP-06",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S014"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-009"
+        ],
+        "causas": [
+          "Modo avión activado por tecla de función"
+        ]
+      },
+      "justificacion": "Ícono de avión activo: modo avión.",
+      "fuente_respuesta": [
+        "T72 (TK-009)"
+      ]
+    },
+    {
+      "id": "CP-07",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 10",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S013",
+          "S015"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-010"
+        ],
+        "causas": [
+          "Controlador del adaptador Wi-Fi desinstalado tras actualización"
+        ]
+      },
+      "justificacion": "Sin redes y adaptador ausente: controlador Wi-Fi.",
+      "fuente_respuesta": [
+        "T72 (TK-010)"
+      ]
+    },
+    {
+      "id": "CP-08",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S016",
+          "S017"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-011",
+          "TK-012"
+        ],
+        "causas": [
+          "Contraseña de red guardada desactualizada tras cambio institucional",
+          "Método de autenticación (PEAP/MSCHAPv2) mal configurado"
+        ]
+      },
+      "justificacion": "Error de autenticación y contraseña repetida: credencial o método de autenticación.",
+      "fuente_respuesta": [
+        "T72 (TK-011)",
+        "T81 (TK-012)"
+      ]
+    },
+    {
+      "id": "CP-09",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S018",
+          "S019"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-013"
+        ],
+        "causas": [
+          "Usuario lejos del punto de acceso y alta concurrencia"
+        ]
+      },
+      "justificacion": "Lento con señal débil: distancia al punto de acceso.",
+      "fuente_respuesta": [
+        "T72 (TK-013)"
+      ]
+    },
+    {
+      "id": "CP-10",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S117"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-014"
+        ],
+        "causas": [
+          "No completó el inicio de sesión del portal cautivo"
+        ]
+      },
+      "justificacion": "Aparece la página de inicio de sesión de la red: portal cautivo.",
+      "fuente_respuesta": [
+        "T28 (TK-014)"
+      ]
+    },
+    {
+      "id": "CP-11",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S020",
+          "S021"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-015"
+        ],
+        "causas": [
+          "Proxy manual configurado por un programa instalado"
+        ]
+      },
+      "justificacion": "Error de proxy y otros programas con internet: proxy del navegador.",
+      "fuente_respuesta": [
+        "T55 (TK-015)"
+      ]
+    },
+    {
+      "id": "CP-12",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.4",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S022",
+          "S024"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-016"
+        ],
+        "causas": [
+          "Cookies y caché del navegador corruptas"
+        ]
+      },
+      "justificacion": "Una plataforma en bucle de inicio de sesión: cookies y caché.",
+      "fuente_respuesta": [
+        "T28 (TK-016)"
+      ]
+    },
+    {
+      "id": "CP-13",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S025",
+          "S026"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-017",
+          "TK-018"
+        ],
+        "causas": [
+          "Pila de la placa agotada: fecha y hora desfasadas",
+          "Zona horaria mal configurada"
+        ]
+      },
+      "justificacion": "Error de certificado con fecha y hora incorrectas.",
+      "fuente_respuesta": [
+        "T13 (TK-017)",
+        "T78 (TK-018)"
+      ]
+    },
+    {
+      "id": "CP-14",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "3.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S028",
+          "S029"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-019"
+        ],
+        "causas": [
+          "Credenciales guardadas desactualizadas en el Administrador de credenciales"
+        ]
+      },
+      "justificacion": "Pide credenciales al abrir la unidad: credenciales guardadas.",
+      "fuente_respuesta": [
+        "T33 (TK-019)"
+      ]
+    },
+    {
+      "id": "CP-15",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S031",
+          "S032"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-020"
+        ],
+        "causas": [
+          "Cable de poder suelto o regleta apagada"
+        ]
+      },
+      "justificacion": "No enciende, sin luces: alimentación (cable o regleta).",
+      "fuente_respuesta": [
+        "T12 (TK-020)"
+      ]
+    },
+    {
+      "id": "CP-16",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S031",
+          "S033"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-021"
+        ],
+        "causas": [
+          "Fuente de poder dañada"
+        ]
+      },
+      "justificacion": "No enciende con olor a quemado: fuente de poder.",
+      "fuente_respuesta": [
+        "T12 (TK-021)"
+      ]
+    },
+    {
+      "id": "CP-17",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.2",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S034",
+          "S036"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-022"
+        ],
+        "causas": [
+          "Módulo de RAM mal asentado"
+        ]
+      },
+      "justificacion": "Sin imagen con pitidos: memoria RAM.",
+      "fuente_respuesta": [
+        "T22 (TK-022)"
+      ]
+    },
+    {
+      "id": "CP-18",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.2",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S034",
+          "S037"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-023"
+        ],
+        "causas": [
+          "Cable VGA/HDMI flojo o en puerto incorrecto"
+        ]
+      },
+      "justificacion": "Sin imagen y monitor en ahorro: cable de video.",
+      "fuente_respuesta": [
+        "T20 (TK-023)"
+      ]
+    },
+    {
+      "id": "CP-19",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S038",
+          "S040"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-024"
+        ],
+        "causas": [
+          "Salida de video en modo 'solo pantalla del PC'"
+        ]
+      },
+      "justificacion": "Proyector sin imagen y pantalla de la laptop normal: modo de proyección.",
+      "fuente_respuesta": [
+        "T45 (TK-024)"
+      ]
+    },
+    {
+      "id": "CP-20",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S042",
+          "S044"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-026"
+        ],
+        "causas": [
+          "Falla de hardware de la pantalla (panel o cable de video interno)"
+        ]
+      },
+      "justificacion": "Líneas que cambian al mover la tapa: panel o cable interno.",
+      "fuente_respuesta": [
+        "T14 (TK-026)"
+      ]
+    },
+    {
+      "id": "CP-21",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S045",
+          "S048"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-028"
+        ],
+        "causas": [
+          "Controlador de video incompatible tras actualización"
+        ]
+      },
+      "justificacion": "Pantalla azul tras actualizar: controlador.",
+      "fuente_respuesta": [
+        "T68 (TK-028)"
+      ]
+    },
+    {
+      "id": "CP-22",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S049",
+          "S051"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-029",
+          "TK-030"
+        ],
+        "causas": [
+          "Polvo acumulado en disipador y ventilador",
+          "Rejillas de ventilación obstruidas por polvo"
+        ]
+      },
+      "justificacion": "Se apaga sola y está muy caliente: sobrecalentamiento por polvo.",
+      "fuente_respuesta": [
+        "T15 (TK-029)",
+        "T15 (TK-030)"
+      ]
+    },
+    {
+      "id": "CP-23",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S052",
+          "S053"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-031"
+        ],
+        "causas": [
+          "Disco duro con falla física inminente"
+        ]
+      },
+      "justificacion": "Disco al 100 % con ruidos: falla física del disco.",
+      "fuente_respuesta": [
+        "T11 (TK-031)"
+      ]
+    },
+    {
+      "id": "CP-24",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.4",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S054",
+          "S116"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-032"
+        ],
+        "causas": [
+          "Disco sin espacio por archivos temporales y descargas"
+        ]
+      },
+      "justificacion": "Disco lleno y no puede guardar.",
+      "fuente_respuesta": [
+        "T58 (TK-032)"
+      ]
+    },
+    {
+      "id": "CP-25",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S055",
+          "S056"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-033"
+        ],
+        "causas": [
+          "Periférico desconectado o puerto USB frontal dañado"
+        ]
+      },
+      "justificacion": "Periférico sin luz: desconectado o puerto dañado.",
+      "fuente_respuesta": [
+        "T63 (TK-033)"
+      ]
+    },
+    {
+      "id": "CP-26",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S057"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-034"
+        ],
+        "causas": [
+          "Pila del mouse agotada"
+        ]
+      },
+      "justificacion": "Mouse inalámbrico sin respuesta: pila.",
+      "fuente_respuesta": [
+        "T63 (TK-034)"
+      ]
+    },
+    {
+      "id": "CP-27",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S058",
+          "S059"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-035"
+        ],
+        "causas": [
+          "Salida de audio predeterminada en el monitor HDMI"
+        ]
+      },
+      "justificacion": "Sin sonido con parlantes conectados: salida predeterminada.",
+      "fuente_respuesta": [
+        "T73 (TK-035)"
+      ]
+    },
+    {
+      "id": "CP-28",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S061"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-036"
+        ],
+        "causas": [
+          "Acceso a la cámara desactivado en privacidad de Windows"
+        ]
+      },
+      "justificacion": "Cámara no detectada: permiso de privacidad.",
+      "fuente_respuesta": [
+        "T34 (TK-036)"
+      ]
+    },
+    {
+      "id": "CP-29",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.6",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S063",
+          "S065"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-037"
+        ],
+        "causas": [
+          "Cargador dañado"
+        ]
+      },
+      "justificacion": "No carga e indicador apagado: cargador.",
+      "fuente_respuesta": [
+        "T17 (TK-037)"
+      ]
+    },
+    {
+      "id": "CP-30",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.6",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S063",
+          "S066"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-038"
+        ],
+        "causas": [
+          "Batería degradada al final de su vida útil"
+        ]
+      },
+      "justificacion": "'Conectado, no se está cargando': batería degradada.",
+      "fuente_respuesta": [
+        "T18 (TK-038)"
+      ]
+    },
+    {
+      "id": "CP-31",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.7",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S068",
+          "S070"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-040"
+        ],
+        "causas": [
+          "La impresora cambió de dirección IP"
+        ]
+      },
+      "justificacion": "Documentos en cola e impresora sin conexión: cambió su IP.",
+      "fuente_respuesta": [
+        "T24 (TK-040)"
+      ]
+    },
+    {
+      "id": "CP-32",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.7",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S072"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-041"
+        ],
+        "causas": [
+          "Papel atascado en el rodillo"
+        ]
+      },
+      "justificacion": "Mensaje de atasco de papel.",
+      "fuente_respuesta": [
+        "T02 (TK-041)"
+      ]
+    },
+    {
+      "id": "CP-33",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.7",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S073",
+          "S074"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-042"
+        ],
+        "causas": [
+          "Controlador de la impresora no instalado"
+        ]
+      },
+      "justificacion": "La impresora de red no aparece: falta el controlador.",
+      "fuente_respuesta": [
+        "T35 (TK-042)"
+      ]
+    },
+    {
+      "id": "CP-34",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.7",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S075"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-043"
+        ],
+        "causas": [
+          "Tóner agotado o modo de ahorro de tóner activo"
+        ]
+      },
+      "justificacion": "Impresión tenue: tóner.",
+      "fuente_respuesta": [
+        "T01 (TK-043)"
+      ]
+    },
+    {
+      "id": "CP-35",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S077",
+          "S078"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-044"
+        ],
+        "causas": [
+          "Exceso de programas que se ejecutan al iniciar"
+        ]
+      },
+      "justificacion": "Inicio lento con muchos programas al inicio.",
+      "fuente_respuesta": [
+        "T41 (TK-044)"
+      ]
+    },
+    {
+      "id": "CP-36",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.1",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S079",
+          "S080"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-045"
+        ],
+        "causas": [
+          "Software no deseado instalado con un programa gratuito"
+        ]
+      },
+      "justificacion": "Publicidad y página de inicio cambiada: software no deseado.",
+      "fuente_respuesta": [
+        "T37 (TK-045)"
+      ]
+    },
+    {
+      "id": "CP-37",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 10",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S081",
+          "S082"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-046"
+        ],
+        "causas": [
+          "4 GB de RAM insuficientes para la carga de trabajo"
+        ]
+      },
+      "justificacion": "RAM al 90 % con muchas pestañas: RAM insuficiente.",
+      "fuente_respuesta": [
+        "T76 (TK-046)"
+      ]
+    },
+    {
+      "id": "CP-38",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S083",
+          "S085"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-047"
+        ],
+        "causas": [
+          "Actualización de Windows que no terminó de instalarse correctamente"
+        ]
+      },
+      "justificacion": "Actualización atascada que deshace cambios.",
+      "fuente_respuesta": [
+        "T46 (TK-047)"
+      ]
+    },
+    {
+      "id": "CP-39",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.2",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S086"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-048"
+        ],
+        "causas": [
+          "Windows no puede cargar el perfil del usuario (perfil dañado) y crea uno temporal"
+        ]
+      },
+      "justificacion": "Perfil temporal.",
+      "fuente_respuesta": [
+        "T60 (TK-048)"
+      ]
+    },
+    {
+      "id": "CP-40",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S088",
+          "S089"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-049"
+        ],
+        "causas": [
+          "Licencia no vinculada a la cuenta institucional"
+        ]
+      },
+      "justificacion": "Office sin activar con edición bloqueada: licencia.",
+      "fuente_respuesta": [
+        "T51 (TK-049)"
+      ]
+    },
+    {
+      "id": "CP-41",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S092"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-050"
+        ],
+        "causas": [
+          "Archivo dañado por cierre inesperado"
+        ]
+      },
+      "justificacion": "Mensaje de archivo dañado.",
+      "fuente_respuesta": [
+        "T66 (TK-050)"
+      ]
+    },
+    {
+      "id": "CP-42",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S093",
+          "S094"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-051"
+        ],
+        "causas": [
+          "Perfil de Outlook dañado"
+        ]
+      },
+      "justificacion": "Outlook desconectado y sin sincronizar: perfil de Outlook.",
+      "fuente_respuesta": [
+        "T50 (TK-051)"
+      ]
+    },
+    {
+      "id": "CP-43",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.3",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S096",
+          "S098"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-052"
+        ],
+        "causas": [
+          "Micrófono incorrecto seleccionado en la aplicación de videollamada"
+        ]
+      },
+      "justificacion": "Micrófono detectado por Windows pero sin audio en la llamada.",
+      "fuente_respuesta": [
+        "T38 (TK-052)"
+      ]
+    },
+    {
+      "id": "CP-44",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S099",
+          "S100"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-053"
+        ],
+        "causas": [
+          "Usuario estándar sin privilegios de instalación"
+        ]
+      },
+      "justificacion": "Pide contraseña de administrador al instalar.",
+      "fuente_respuesta": [
+        "T47 (TK-053)"
+      ]
+    },
+    {
+      "id": "CP-45",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Ubuntu 22.04",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S101",
+          "S102"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-054"
+        ],
+        "causas": [
+          "Paquetes faltantes o desactualizados"
+        ]
+      },
+      "justificacion": "Error de dependencias en Ubuntu.",
+      "fuente_respuesta": [
+        "T09 (TK-054)"
+      ]
+    },
+    {
+      "id": "CP-46",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S103",
+          "S104"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-055"
+        ],
+        "causas": [
+          "Falso positivo del antivirus"
+        ]
+      },
+      "justificacion": "Antivirus pone en cuarentena un programa legítimo.",
+      "fuente_respuesta": [
+        "T44 (TK-055)"
+      ]
+    },
+    {
+      "id": "CP-47",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "2.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S105",
+          "S106"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-056"
+        ],
+        "causas": [
+          "Infección por ransomware (vector frecuente: adjunto de correo malicioso)"
+        ]
+      },
+      "justificacion": "Extensiones extrañas y nota de rescate: ransomware.",
+      "fuente_respuesta": [
+        "T29 (TK-056)"
+      ]
+    },
+    {
+      "id": "CP-48",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "4.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S109"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-057"
+        ],
+        "causas": [
+          "Cuenta bloqueada por intentos fallidos"
+        ]
+      },
+      "justificacion": "Cuenta bloqueada.",
+      "fuente_respuesta": [
+        "T31 (TK-057)"
+      ]
+    },
+    {
+      "id": "CP-49",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "4.1",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S110"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-058"
+        ],
+        "causas": [
+          "Contraseña olvidada"
+        ]
+      },
+      "justificacion": "Contraseña olvidada.",
+      "fuente_respuesta": [
+        "T36 (TK-058)"
+      ]
+    },
+    {
+      "id": "CP-50",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "4.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S111",
+          "S112"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-059"
+        ],
+        "causas": [
+          "Contraseña caducada según política"
+        ]
+      },
+      "justificacion": "Contraseña vencida.",
+      "fuente_respuesta": [
+        "T59 (TK-059)"
+      ]
+    },
+    {
+      "id": "CP-51",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "4.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S113",
+          "S115"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-060"
+        ],
+        "causas": [
+          "Método de verificación vinculado al celular anterior"
+        ]
+      },
+      "justificacion": "No llega el código tras cambiar de celular.",
+      "fuente_respuesta": [
+        "T32 (TK-060)"
+      ]
+    },
+    {
+      "id": "CP-52",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S118",
+          "S119"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-061"
+        ],
+        "causas": [
+          "Cable USB flojo o dañado, o Windows apaga el puerto USB para ahorrar energía"
+        ]
+      },
+      "justificacion": "Periférico USB con cable que se desconecta.",
+      "fuente_respuesta": [
+        "T63 (TK-061)"
+      ]
+    },
+    {
+      "id": "CP-53",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S118",
+          "S120"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-062"
+        ],
+        "causas": [
+          "Pilas o batería del periférico bajas, o el receptor USB perdió la conexión"
+        ]
+      },
+      "justificacion": "Periférico inalámbrico con receptor que se desconecta.",
+      "fuente_respuesta": [
+        "T63 (TK-062)"
+      ]
+    },
+    {
+      "id": "CP-54",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S118",
+          "S121"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-063"
+        ],
+        "causas": [
+          "El ahorro de energía de Windows apaga el adaptador Bluetooth"
+        ]
+      },
+      "justificacion": "Periférico Bluetooth que se desconecta.",
+      "fuente_respuesta": [
+        "T82 (TK-063)"
+      ]
+    },
+    {
+      "id": "CP-55",
+      "tipo": "típico",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S122",
+          "S123"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-064"
+        ],
+        "causas": [
+          "Cable de los audífonos flojo, dañado o conectado al conector incorrecto"
+        ]
+      },
+      "justificacion": "El sonido vuelve al mover el cable.",
+      "fuente_respuesta": [
+        "T73 (TK-064)"
+      ]
+    },
+    {
+      "id": "CP-56",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Ubuntu 22.04",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S001",
+          "S002",
+          "S003"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-001",
+          "TK-002"
+        ],
+        "causas": [
+          "La caché DNS conserva respuestas incorrectas o desactualizadas (por ejemplo, tras un cambio de servidor)",
+          "Servidor DNS configurado manualmente con una dirección que ya no existe"
+        ]
+      },
+      "justificacion": "Mismo problema de DNS en Ubuntu: la solución debe adaptarse con R1.",
+      "fuente_respuesta": [
+        "T75 (TK-001)",
+        "T75 (TK-002)"
+      ]
+    },
+    {
+      "id": "CP-57",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S014"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-009"
+        ],
+        "causas": [
+          "Modo avión activado por tecla de función"
+        ]
+      },
+      "justificacion": "Modo avión en una PC de escritorio con Wi-Fi.",
+      "fuente_respuesta": [
+        "T72 (TK-009)"
+      ]
+    },
+    {
+      "id": "CP-58",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S009",
+          "S010"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-007",
+          "TK-008"
+        ],
+        "causas": [
+          "No obtuvo IP del DHCP (dirección APIPA)",
+          "Pool de direcciones DHCP agotado en la VLAN de aulas"
+        ]
+      },
+      "justificacion": "APIPA en un solo equipo o ámbito agotado: falta saber si hay varios usuarios afectados.",
+      "fuente_respuesta": [
+        "T56 (TK-007)",
+        "T49 (TK-008)"
+      ]
+    },
+    {
+      "id": "CP-59",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S001",
+          "S010"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-007",
+          "TK-008"
+        ],
+        "causas": [
+          "No obtuvo IP del DHCP (dirección APIPA)",
+          "Pool de direcciones DHCP agotado en la VLAN de aulas"
+        ]
+      },
+      "justificacion": "Sin internet con 169.254.x.x: misma duda (uno o varios usuarios).",
+      "fuente_respuesta": [
+        "T56 (TK-007)",
+        "T49 (TK-008)"
+      ]
+    },
+    {
+      "id": "CP-60",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "1.7",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S067",
+          "S068"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-039",
+          "TK-040"
+        ],
+        "causas": [
+          "Cola de impresión atascada",
+          "La impresora cambió de dirección IP"
+        ]
+      },
+      "justificacion": "Documentos en cola: puede ser la cola atascada o la impresora sin conexión.",
+      "fuente_respuesta": [
+        "T42 (TK-039)",
+        "T24 (TK-040)"
+      ]
+    },
+    {
+      "id": "CP-61",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "1.1",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S031"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-020",
+          "TK-021"
+        ],
+        "causas": [
+          "Cable de poder suelto o regleta apagada",
+          "Fuente de poder dañada"
+        ]
+      },
+      "justificacion": "Solo «no enciende»: varias causas posibles.",
+      "fuente_respuesta": [
+        "T12 (TK-020)",
+        "T12 (TK-021)"
+      ]
+    },
+    {
+      "id": "CP-62",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S001"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-001",
+          "TK-002",
+          "TK-003",
+          "TK-004",
+          "TK-005"
+        ],
+        "causas": [
+          "Cable de red desconectado del punto de red",
+          "Conector RJ45 del cable dañado",
+          "La caché DNS conserva respuestas incorrectas o desactualizadas (por ejemplo, tras un cambio de servidor)",
+          "Puerto del switch desactivado o dañado",
+          "Servidor DNS configurado manualmente con una dirección que ya no existe"
+        ]
+      },
+      "justificacion": "Solo «sin acceso a internet»: síntoma general.",
+      "fuente_respuesta": [
+        "T75 (TK-001)",
+        "T75 (TK-002)"
+      ]
+    },
+    {
+      "id": "CP-63",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S118"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-061",
+          "TK-062",
+          "TK-063"
+        ],
+        "causas": [
+          "Cable USB flojo o dañado, o Windows apaga el puerto USB para ahorrar energía",
+          "El ahorro de energía de Windows apaga el adaptador Bluetooth",
+          "Pilas o batería del periférico bajas, o el receptor USB perdió la conexión"
+        ]
+      },
+      "justificacion": "El periférico se desconecta, sin saber cómo se conecta.",
+      "fuente_respuesta": [
+        "T63 (TK-061)",
+        "T63 (TK-062)"
+      ]
+    },
+    {
+      "id": "CP-64",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "4.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S107"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-057",
+          "TK-058",
+          "TK-059"
+        ],
+        "causas": [
+          "Contraseña caducada según política",
+          "Contraseña olvidada",
+          "Cuenta bloqueada por intentos fallidos"
+        ]
+      },
+      "justificacion": "Solo «no puede iniciar sesión».",
+      "fuente_respuesta": [
+        "T31 (TK-057)",
+        "T36 (TK-058)"
+      ]
+    },
+    {
+      "id": "CP-65",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "2.1",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S047"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-044",
+          "TK-045",
+          "TK-046"
+        ],
+        "causas": [
+          "4 GB de RAM insuficientes para la carga de trabajo",
+          "Exceso de programas que se ejecutan al iniciar",
+          "Software no deseado instalado con un programa gratuito"
+        ]
+      },
+      "justificacion": "Solo «equipo lento».",
+      "fuente_respuesta": [
+        "T41 (TK-044)",
+        "T37 (TK-045)"
+      ]
+    },
+    {
+      "id": "CP-66",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.2",
+        "dispositivo": "Laptop",
+        "so": "Windows 11",
+        "conexion": "Wi-Fi",
+        "sintomas": [
+          "S009",
+          "S010",
+          "S012"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-008"
+        ],
+        "causas": [
+          "Pool de direcciones DHCP agotado en la VLAN de aulas"
+        ]
+      },
+      "justificacion": "Varios usuarios con 169.254.x.x: se escala (R5).",
+      "fuente_respuesta": [
+        "T49 (TK-008)"
+      ]
+    },
+    {
+      "id": "CP-67",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "3.4",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S011",
+          "S025"
+        ]
+      },
+      "esperado": {
+        "accion": "proponer",
+        "casos": [
+          "TK-017",
+          "TK-018"
+        ],
+        "causas": [
+          "Pila de la placa agotada: fecha y hora desfasadas",
+          "Zona horaria mal configurada"
+        ]
+      },
+      "justificacion": "Páginas no cargan con error de certificado.",
+      "fuente_respuesta": [
+        "T13 (TK-017)",
+        "T78 (TK-018)"
+      ]
+    },
+    {
+      "id": "CP-68",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "2.2",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S084"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-047"
+        ],
+        "causas": [
+          "Actualización de Windows que no terminó de instalarse correctamente"
+        ]
+      },
+      "justificacion": "Solo «reinicio en bucle»: falta confirmar si fue tras una actualización.",
+      "fuente_respuesta": [
+        "T46 (TK-047)"
+      ]
+    },
+    {
+      "id": "CP-69",
+      "tipo": "difícil",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Ubuntu 22.04",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S118"
+        ]
+      },
+      "esperado": {
+        "accion": "preguntar",
+        "casos": [
+          "TK-062"
+        ],
+        "causas": [
+          "Pilas o batería del periférico bajas, o el receptor USB perdió la conexión"
+        ]
+      },
+      "justificacion": "Periférico que se desconecta en Ubuntu sin saber cómo se conecta: debe preguntar antes de suponer pilas o receptor.",
+      "fuente_respuesta": [
+        "T63 (TK-062)"
+      ]
+    },
+    {
+      "id": "CP-70",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "3.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S019"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Subcategoría Wi-Fi con conexión cableada: el ticket se contradice.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    },
+    {
+      "id": "CP-71",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S118",
+          "S119",
+          "S121"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Periférico con cable USB y por Bluetooth a la vez: contradicción.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    },
+    {
+      "id": "CP-72",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "1.5",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S055",
+          "S122"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Mouse y audífonos en un mismo ticket: dos fallas.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    },
+    {
+      "id": "CP-73",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "2.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Ubuntu 22.04",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S088",
+          "S089"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Licencia de Office en Ubuntu: la solución del caso solo aplica a Windows.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    },
+    {
+      "id": "CP-74",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "1.3",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S035"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Solo un dato de contexto (ventiladores funcionan), sin síntoma de falla.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    },
+    {
+      "id": "CP-75",
+      "tipo": "límite",
+      "ticket": {
+        "codigo_cat": "1.6",
+        "dispositivo": "PC de escritorio",
+        "so": "Windows 11",
+        "conexion": "Cableada",
+        "sintomas": [
+          "S063"
+        ]
+      },
+      "esperado": {
+        "accion": "no proponer",
+        "casos": [],
+        "causas": []
+      },
+      "justificacion": "Batería en una PC de escritorio: dato imposible.",
+      "fuente_respuesta": [
+        "[8] Sec. 5 (revisar que los datos tengan sentido) y [4] p. 38 (escalar)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "descripcion": "Estructura del caso (ticket): parte de PROBLEMA (entra en la similitud) y parte de SOLUCIÓN.",
+  "fuente": "[4] p. 96 (ficha del incidente); [6] Sec. 3.1–3.2 (atributos por tipo)",
+  "atributos": [
+    {
+      "campo": "id",
+      "papel": "Control",
+      "tipo": "Texto TK-nnn",
+      "similitud": false,
+      "fuente": "[3] campos del ticket"
+    },
+    {
+      "campo": "codigo_cat / categoria / subcategoria",
+      "papel": "Problema",
+      "tipo": "Jerárquico",
+      "similitud": true,
+      "fuente": "[4] p. 86; [7] Sec. 3.1"
+    },
+    {
+      "campo": "tipo_caso",
+      "papel": "Control",
+      "tipo": "Incidente | Problema | Requerimiento",
+      "similitud": false,
+      "fuente": "[1] p. 224"
+    },
+    {
+      "campo": "dispositivo",
+      "papel": "Problema",
+      "tipo": "PC de escritorio | Laptop",
+      "similitud": true,
+      "fuente": "[6] Ec. 1"
+    },
+    {
+      "campo": "so",
+      "papel": "Problema",
+      "tipo": "Windows 10 | Windows 11 | Ubuntu 22.04",
+      "similitud": true,
+      "fuente": "[6] Ec. 1 y Ec. 4"
+    },
+    {
+      "campo": "conexion",
+      "papel": "Problema",
+      "tipo": "Cableada | Wi-Fi",
+      "similitud": true,
+      "fuente": "[6] Ec. 1"
+    },
+    {
+      "campo": "ubicacion",
+      "papel": "Contexto",
+      "tipo": "Laboratorio | Aula | Oficina administrativa | Biblioteca | Auditorio",
+      "similitud": false,
+      "fuente": "[4] p. 65"
+    },
+    {
+      "campo": "sintomas",
+      "papel": "Problema",
+      "tipo": "Conjunto de 1 a 3 códigos del catálogo",
+      "similitud": true,
+      "fuente": "[4] p. 37; [5]; [3] Ec. 2"
+    },
+    {
+      "campo": "efecto",
+      "papel": "Contexto",
+      "tipo": "Texto libre (solo se muestra)",
+      "similitud": false,
+      "fuente": "[4] p. 96"
+    },
+    {
+      "campo": "objeto_fallo / causa / solucion",
+      "papel": "Solución",
+      "tipo": "Texto",
+      "similitud": false,
+      "fuente": "[4] p. 96"
+    },
+    {
+      "campo": "prioridad",
+      "papel": "Contexto",
+      "tipo": "Alta | Media | Baja",
+      "similitud": false,
+      "fuente": "[4] p. 87"
+    },
+    {
+      "campo": "tiempo_min",
+      "papel": "Solución",
+      "tipo": "Numérico > 0",
+      "similitud": false,
+      "fuente": "[4] p. 98"
+    },
+    {
+      "campo": "nivel",
+      "papel": "Solución",
+      "tipo": "1.er nivel | 2.º nivel",
+      "similitud": false,
+      "fuente": "[4] p. 38; [2] p. 41"
+    },
+    {
+      "campo": "resultado",
+      "papel": "Solución",
+      "tipo": "Resuelto | Resuelto parcialmente",
+      "similitud": false,
+      "fuente": "[4] p. 49"
+    },
+    {
+      "campo": "veces_exito",
+      "papel": "Solución",
+      "tipo": "Entero ≥ 1",
+      "similitud": false,
+      "fuente": "[7] Sec. 3.3"
+    },
+    {
+      "campo": "validacion",
+      "papel": "Control",
+      "tipo": "estado + respaldo (fuente, sección, evidencia literal)",
+      "similitud": false,
+      "fuente": "[1] p. 9; [8] Sec. 7"
+    },
+    {
+      "campo": "so_aplicable",
+      "papel": "Solución",
+      "tipo": "Lista: Windows | Ubuntu",
+      "similitud": false,
+      "fuente": "[9] Sec. 4; [8] Sec. 6"
+    },
+    {
+      "campo": "conexion_aplicable",
+      "papel": "Solución",
+      "tipo": "Lista: Cableada | Wi-Fi",
+      "similitud": false,
+      "fuente": "[9] Sec. 4"
+    },
+    {
+      "campo": "dispositivo_aplicable",
+      "papel": "Solución",
+      "tipo": "Lista: PC de escritorio | Laptop",
+      "similitud": false,
+      "fuente": "[9] Sec. 4"
+    }
+  ]
+}

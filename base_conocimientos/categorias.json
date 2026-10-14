@@ -1,0 +1,153 @@
+{
+  "descripcion": "Árbol de categorías (tipificación). La recuperación busca primero en la subcategoría y, si no hay casos que compartan síntomas, sube a la categoría padre. «requiere» indica la conexión o el dispositivo que exige la subcategoría.",
+  "fuente": "[4] p. 86 (tabla de categorías con código); [7] Sec. 3.1–3.2 (Typification Tree)",
+  "categorias": [
+    {
+      "codigo": "1",
+      "categoria": "Hardware",
+      "subcategoria": null,
+      "padre": null
+    },
+    {
+      "codigo": "1.1",
+      "categoria": "Hardware",
+      "subcategoria": "Encendido",
+      "padre": "1"
+    },
+    {
+      "codigo": "1.2",
+      "categoria": "Hardware",
+      "subcategoria": "Video",
+      "padre": "1"
+    },
+    {
+      "codigo": "1.3",
+      "categoria": "Hardware",
+      "subcategoria": "Estabilidad",
+      "padre": "1"
+    },
+    {
+      "codigo": "1.4",
+      "categoria": "Hardware",
+      "subcategoria": "Almacenamiento",
+      "padre": "1"
+    },
+    {
+      "codigo": "1.5",
+      "categoria": "Hardware",
+      "subcategoria": "Periféricos",
+      "padre": "1"
+    },
+    {
+      "codigo": "1.6",
+      "categoria": "Hardware",
+      "subcategoria": "Batería",
+      "padre": "1",
+      "requiere": {
+        "dispositivo": "Laptop"
+      }
+    },
+    {
+      "codigo": "1.7",
+      "categoria": "Hardware",
+      "subcategoria": "Impresión",
+      "padre": "1"
+    },
+    {
+      "codigo": "2",
+      "categoria": "Software",
+      "subcategoria": null,
+      "padre": null
+    },
+    {
+      "codigo": "2.1",
+      "categoria": "Software",
+      "subcategoria": "Rendimiento",
+      "padre": "2"
+    },
+    {
+      "codigo": "2.2",
+      "categoria": "Software",
+      "subcategoria": "Sistema operativo",
+      "padre": "2"
+    },
+    {
+      "codigo": "2.3",
+      "categoria": "Software",
+      "subcategoria": "Ofimática",
+      "padre": "2"
+    },
+    {
+      "codigo": "2.4",
+      "categoria": "Software",
+      "subcategoria": "Instalación",
+      "padre": "2"
+    },
+    {
+      "codigo": "2.5",
+      "categoria": "Software",
+      "subcategoria": "Seguridad",
+      "padre": "2"
+    },
+    {
+      "codigo": "3",
+      "categoria": "Red",
+      "subcategoria": null,
+      "padre": null
+    },
+    {
+      "codigo": "3.1",
+      "categoria": "Red",
+      "subcategoria": "Conectividad cableada",
+      "padre": "3",
+      "requiere": {
+        "conexion": "Cableada"
+      }
+    },
+    {
+      "codigo": "3.2",
+      "categoria": "Red",
+      "subcategoria": "Direccionamiento IP",
+      "padre": "3"
+    },
+    {
+      "codigo": "3.3",
+      "categoria": "Red",
+      "subcategoria": "Wi-Fi",
+      "padre": "3",
+      "requiere": {
+        "conexion": "Wi-Fi"
+      }
+    },
+    {
+      "codigo": "3.4",
+      "categoria": "Red",
+      "subcategoria": "Navegador y proxy",
+      "padre": "3"
+    },
+    {
+      "codigo": "3.5",
+      "categoria": "Red",
+      "subcategoria": "Recursos compartidos",
+      "padre": "3"
+    },
+    {
+      "codigo": "4",
+      "categoria": "Cuentas",
+      "subcategoria": null,
+      "padre": null
+    },
+    {
+      "codigo": "4.1",
+      "categoria": "Cuentas",
+      "subcategoria": "Acceso",
+      "padre": "4"
+    },
+    {
+      "codigo": "4.2",
+      "categoria": "Cuentas",
+      "subcategoria": "Autenticación",
+      "padre": "4"
+    }
+  ]
+}

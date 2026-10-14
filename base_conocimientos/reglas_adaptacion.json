@@ -1,0 +1,304 @@
+{
+  "descripcion": "Conocimiento de adaptación (paso REUTILIZAR). Adaptación por sustitución: se cambia solo la parte de la solución que depende de la diferencia entre el caso recuperado y el ticket nuevo.",
+  "fuentes_metodo": [
+    {
+      "fuente": "[9]",
+      "ubicacion": "Sec. 4",
+      "evidencia": "Substitution adaptation simply reinstantiates some part(s) of the retrieved solution"
+    },
+    {
+      "fuente": "[8]",
+      "ubicacion": "Sec. 6",
+      "evidencia": "La solución del caso recuperado se copia o se adapta (tareas Copy / Adapt)."
+    }
+  ],
+  "reglas": [
+    {
+      "id": "R1",
+      "tipo": "Sustitución",
+      "si": "El caso recuperado es de Windows y el ticket nuevo es de Ubuntu (o al revés)",
+      "entonces": "Sustituir los comandos del sistema operativo por su equivalente documentado",
+      "fuentes": [
+        "[9] Sec. 4",
+        "[8] Sec. 6"
+      ],
+      "sustituciones_windows_a_ubuntu": [
+        {
+          "windows": "ipconfig /flushdns",
+          "ubuntu": "resolvectl flush-caches",
+          "fuente_windows": "T57",
+          "fuente_ubuntu": "T79"
+        },
+        {
+          "windows": "ipconfig /release",
+          "ubuntu": "sudo dhclient -r",
+          "fuente_windows": "T57",
+          "fuente_ubuntu": "T10"
+        },
+        {
+          "windows": "ipconfig /renew",
+          "ubuntu": "sudo dhclient",
+          "fuente_windows": "T57",
+          "fuente_ubuntu": "T10"
+        },
+        {
+          "windows": "ipconfig /all",
+          "ubuntu": "nmcli device show",
+          "fuente_windows": "T57",
+          "fuente_ubuntu": "T05"
+        }
+      ],
+      "evidencias": [
+        {
+          "fuente": "T57",
+          "seccion": "Parameters – /flushdns",
+          "evidencia": "Vacía y restablece el contenido de la caché de resolución del cliente DNS.",
+          "nota": "Define la acción Windows que se sustituye por resolvectl flush-caches en Ubuntu."
+        },
+        {
+          "fuente": "T57",
+          "seccion": "Parameters – /release",
+          "evidencia": "Sends a DHCPRELEASE message to the DHCP server to release the current DHCP configuration and discard the IP address configuration",
+          "nota": "Equivalente funcional de dhclient -r. (texto de la versión en inglés de la página)",
+          "url_evidencia": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
+        },
+        {
+          "fuente": "T57",
+          "seccion": "Parameters – /renew",
+          "evidencia": "Renueva la configuración de DHCP para todos los adaptadores (si no se especifica un adaptador) o para un adaptador específico si se incluye el parámetro del adaptador.",
+          "nota": "Equivalente funcional de ejecutar dhclient (sin -r) sobre la interfaz."
+        },
+        {
+          "fuente": "T57",
+          "seccion": "Parameters – /all",
+          "evidencia": "Displays the full TCP/IP configuration for all adapters.",
+          "nota": "Contraparte Windows de nmcli device show. (texto de la versión en inglés de la página)",
+          "url_evidencia": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig"
+        },
+        {
+          "fuente": "T79",
+          "seccion": "COMMANDS – flush-caches",
+          "evidencia": "Flushes all DNS resource record caches the service maintains locally.",
+          "nota": "Manpage upstream de systemd (man7.org, systemd 262~devel)."
+        },
+        {
+          "fuente": "T10",
+          "seccion": "OPTIONS – -r",
+          "evidencia": "Release the current lease and stop the running DHCP client as previously recorded in the PID file.",
+          "nota": "Se usó Debian bookworm, mismo paquete isc-dhcp-client del que deriva Ubuntu."
+        },
+        {
+          "fuente": "T10",
+          "seccion": "DESCRIPTION",
+          "evidencia": "The Internet Systems Consortium DHCP Client, dhclient, provides a means for configuring one or more network interfaces",
+          "nota": "Respalda dhclient <iface> como sustituto de ipconfig /renew."
+        },
+        {
+          "fuente": "T05",
+          "seccion": "device – show and manage network interfaces",
+          "evidencia": "Show and manage network interfaces.",
+          "nota": "Manpage de Ubuntu jammy (network-manager 1.36.6-0ubuntu2)."
+        },
+        {
+          "fuente": "T05",
+          "seccion": "device status; device show",
+          "evidencia": "Print status of devices. / Show detailed information about devices.",
+          "nota": "Dos frases literales de la misma página (status y show); contraparte de ipconfig /all."
+        },
+        {
+          "fuente": "T05",
+          "seccion": "radio wifi",
+          "evidencia": "Show or set status of Wi-Fi in NetworkManager.",
+          "nota": "Sustituto Ubuntu de 'Make sure that Wi-Fi is turned on' (Windows)."
+        },
+        {
+          "fuente": "T70",
+          "seccion": "DNS Client",
+          "evidencia": "The DNS Client service (dnscache) caches Domain Name System (DNS) names and registers the full computer name for this computer.",
+          "nota": "Nombre de servicio: Dnscache."
+        },
+        {
+          "fuente": "T80",
+          "seccion": "DESCRIPTION",
+          "evidencia": "systemd-resolved is a system service that provides network name resolution to local applications. It implements a caching and validating DNS/DNSSEC stub resolver",
+          "nota": "Equivale al servicio Cliente DNS de Windows (caché DNS local). se usó la manpage upstream."
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "tipo": "Sustitución",
+      "si": "El caso recuperado es de conexión cableada y el ticket nuevo es Wi-Fi (o al revés)",
+      "entonces": "Sustituir la verificación física del cable por la verificación equivalente del Wi-Fi",
+      "fuentes": [
+        "[9] Sec. 4",
+        "T54",
+        "T72"
+      ],
+      "sustituciones_cableada_a_wifi": [
+        {
+          "cableada": "Reconectar el cable y verificar luz de enlace",
+          "wifi": "Verificar que el Wi-Fi esté activado, el modo avión desactivado y el equipo conectado a la red institucional"
+        },
+        {
+          "cableada": "Reemplazar el patch cord por uno nuevo y probar",
+          "wifi": "Olvidar la red Wi-Fi, volver a conectar con la contraseña vigente y probar"
+        },
+        {
+          "cableada": "cable de red",
+          "wifi": "conexión Wi-Fi"
+        }
+      ],
+      "evidencias": [
+        {
+          "fuente": "T54",
+          "seccion": "Check the Ethernet cable and connection",
+          "evidencia": "Make sure the Ethernet cable is securely plugged into the Ethernet port on both your router and Windows PC.",
+          "nota": "Paso propio de la variante cableada."
+        },
+        {
+          "fuente": "T54",
+          "seccion": "Ethernet cable / Restart modem and router",
+          "evidencia": "If one Ethernet cable doesn't work and you have another one nearby, try the other Ethernet cable to see if that works.",
+          "nota": "La página habla de las luces del módem y del router ('looking at the status lights on the two devices'), no de las luces del adaptador de red del PC."
+        },
+        {
+          "fuente": "T72",
+          "seccion": "Paso 1",
+          "evidencia": "Asegúrese de que Wi-Fi está activado.",
+          "nota": "Paso propio de la variante Wi-Fi. El paso 2 dice además: 'Ensure Airplane mode is turned off.'"
+        },
+        {
+          "fuente": "T72",
+          "seccion": "Paso 3",
+          "evidencia": "Seleccione su red Wi-Fi y haga clic en Olvidar.",
+          "nota": "Sigue: 'Reconnect to the network by selecting it and entering the password.'"
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "tipo": "Sustitución",
+      "si": "El caso recuperado es de PC de escritorio y el ticket nuevo es de laptop (o al revés)",
+      "entonces": "Sustituir los componentes de energía y puertos que cambian entre equipos",
+      "fuentes": [
+        "[9] Sec. 4",
+        "T12"
+      ],
+      "sustituciones_pc_a_laptop": [
+        {
+          "pc": "Revisar y conectar el cable de poder y la regleta",
+          "laptop": "Revisar el LED del adaptador de CA, reconectar el cargador y revisar la batería"
+        },
+        {
+          "pc": "reemplazar la fuente de poder",
+          "laptop": "reemplazar el adaptador de CA o la batería"
+        },
+        {
+          "pc": "Conectar a un puerto USB trasero",
+          "laptop": "Conectar a otro puerto USB"
+        }
+      ],
+      "evidencias": [
+        {
+          "fuente": "T12",
+          "seccion": "Desktop",
+          "evidencia": "Ensure the power cable is securely connected to the power supply.",
+          "nota": "La misma página separa la solución en dos secciones: laptop y desktop."
+        },
+        {
+          "fuente": "T12",
+          "seccion": "Desktop",
+          "evidencia": "When using a power strip or surge protector, make sure it's turned on and working properly.",
+          "nota": "También: 'Plug the desktop into a different wall outlet to identify a faulty power outlet.'"
+        },
+        {
+          "fuente": "T12",
+          "seccion": "Laptop",
+          "evidencia": "If the LED is off, reseat the power cable. If the LED remains off, replace the AC adapter.",
+          "nota": "Paso propio de la variante portátil."
+        },
+        {
+          "fuente": "T12",
+          "seccion": "Laptop",
+          "evidencia": "If your laptop has a removable battery, remove it",
+          "nota": "Revisión de la batería, propia de los portátiles."
+        },
+        {
+          "fuente": "T19",
+          "seccion": "Artículo completo",
+          "evidencia": "Bypass surge protectors, power strips, or UPS devices and plug directly into the wall, these can fail silently.",
+          "nota": "Refuerza la rama de escritorio; para la PSU: 'Failed (no LED, or fan doesn't spin): The power supply is likely the problem.'"
+        },
+        {
+          "fuente": "T17",
+          "seccion": "Artículo completo",
+          "evidencia": "Look at the battery charging LED (usually near the power port).",
+          "nota": "Refuerza la rama de portátil."
+        }
+      ]
+    },
+    {
+      "id": "R4",
+      "tipo": "Escalamiento",
+      "si": "El caso recuperado se resolvió en 2.º nivel",
+      "entonces": "Mostrar la causa probable y la indicación «derivar a 2.º nivel», sin pedir al técnico de 1.er nivel que ejecute la reparación",
+      "fuentes": [
+        "[4] p. 38",
+        "[2] p. 41",
+        "[1] p. 60",
+        "[12] Sec. 2.3.1"
+      ],
+      "evidencias": [
+        {
+          "fuente": "[4]",
+          "seccion": "p. 38, f. Escalado de Incidencias",
+          "evidencia": "Escalado Funcional. Sucede cuando la incidencia debe ser inmediatamente escalada para un mayor apoyo.",
+          "nota": "La incidencia que requiere conocimiento técnico mayor se escala."
+        },
+        {
+          "fuente": "[2]",
+          "seccion": "p. 41",
+          "evidencia": "estos equipos se agrupan en unidades de primer, segundo y tercer nivel de soporte",
+          "nota": "Define los niveles de soporte."
+        },
+        {
+          "fuente": "[1]",
+          "seccion": "p. 60 (p. 82 del PDF)",
+          "evidencia": "Si en todo caso el usuario no está satisfecho con las soluciones brindadas por el sistema se podrá derivar con un especialista.",
+          "nota": "El sistema basado en casos deriva al especialista."
+        },
+        {
+          "fuente": "[12]",
+          "seccion": "2.3.1 Policy Elements",
+          "evidencia": "the handoff and escalation points in the incident management process",
+          "nota": "Refuerzo (documento retirado en 2025, pero se puede consultar)."
+        }
+      ]
+    },
+    {
+      "id": "R5",
+      "tipo": "Escalamiento",
+      "si": "El ticket nuevo incluye el síntoma «Varios usuarios con el mismo fallo»",
+      "entonces": "Tratarlo como posible PROBLEMA (causa común de varios incidentes) y escalar a 2.º nivel aunque el caso recuperado sea de 1.er nivel",
+      "fuentes": [
+        "[4] p. 184",
+        "[1] p. 224"
+      ],
+      "evidencias": [
+        {
+          "fuente": "[4]",
+          "seccion": "p. 184, recomendación 3°",
+          "evidencia": "cuando la misma incidencia ocurre 3 veces por semana durante 2 semanas seguidas sea considerada como un problema",
+          "nota": "La repetición de una misma incidencia la convierte en problema."
+        },
+        {
+          "fuente": "[1]",
+          "seccion": "p. 224 (p. 246 del PDF)",
+          "evidencia": "Problema: Es cuando un Incidente se es reiterativo ya está categorizado como un Problema.",
+          "nota": "Distingue incidente de problema."
+        }
+      ]
+    }
+  ]
+}
